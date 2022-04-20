@@ -15,6 +15,7 @@
 			@expand="collapsed = false"
 		>
 			<n-menu
+				:value="selectedKeys"
 				:options="menus.value"
 				:inverted="inverted"
 				:collapsed="collapsed"
@@ -23,11 +24,13 @@
 				:indent="20"
 			/>
 		</n-layout-sider>
+
 		<n-layout>
 			<n-layout-header> header </n-layout-header>
 			<n-layout-content>
 				<router-view />
 			</n-layout-content>
+			<!-- <n-back-top :right="100" /> -->
 			<n-layout-footer>footer</n-layout-footer>
 		</n-layout>
 	</n-layout>
@@ -35,6 +38,13 @@
 
 <script setup lang="ts">
 import { useMenuStore } from '~/stores/menu'
+// 监听路由变化
+const currentRoute = useRoute()
+const selectedKeys = ref(currentRoute.name as string)
+watch(currentRoute, (route) => {
+	selectedKeys.value = route.name as string
+})
+
 const inverted = ref(true)
 const collapsed = ref(false)
 const menus = useMenuStore()

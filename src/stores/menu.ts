@@ -1,23 +1,36 @@
 import { defineStore } from 'pinia'
+import { RouterLink } from 'vue-router'
 
 export const useMenuStore = defineStore('menus', {
 	state: () => {
 		return {
 			value: [
 				{
-					label: '且听风吟',
-					key: 'hear-the-wind-sing',
+					label: () =>
+						h(
+							RouterLink,
+							{
+								to: { name: 'Index' },
+							},
+							{ default: () => '首页' }
+						),
+					key: 'Index',
 				},
 				{
-					label: '1973年的弹珠玩具',
-					key: 'pinball-1973',
-					disabled: true,
-					children: [
-						{
-							label: '鼠',
-							key: 'rat',
-						},
-					],
+					label: () =>
+						h(
+							RouterLink,
+							{
+								to: {
+									name: 'test',
+									// params: {
+									// 	lang: 'zh-CN',
+									// },
+								},
+							},
+							{ default: () => '回家' }
+						),
+					key: 'test',
 				},
 				{
 					label: '寻羊冒险记',
@@ -73,4 +86,5 @@ export const useMenuStore = defineStore('menus', {
 		}
 	},
 	actions: {},
+	getters: {},
 })
