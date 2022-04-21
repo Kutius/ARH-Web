@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-view">
-		<div class="bg-view-container bg-blue-400/40 shadow">
+		<div class="bg-view-container bg-blue-200/40 shadow">
 			<router-view />
 		</div>
 	</div>
@@ -21,7 +21,7 @@
 
 	&-container {
 		border-radius: 10px;
-		padding: 20px 15px;
+		padding: 30px 15px;
 		width: 400px;
 		height: 340px;
 	}

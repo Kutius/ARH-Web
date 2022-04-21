@@ -6,7 +6,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     'ICarbon:hazeNight': typeof import('~icons/carbon/haze-night')['default']
     'ICarbon:lightFilled': typeof import('~icons/carbon/light-filled')['default']
+    'ICarbon:password': typeof import('~icons/carbon/password')['default']
+    'ICarbon:userAvatar': typeof import('~icons/carbon/user-avatar')['default']
+    NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']
