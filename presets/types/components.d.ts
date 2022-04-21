@@ -4,7 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    NBackTop: typeof import('naive-ui')['NBackTop']
+    'ICarbon:hazeNight': typeof import('~icons/carbon/haze-night')['default']
+    'ICarbon:lightFilled': typeof import('~icons/carbon/light-filled')['default']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
