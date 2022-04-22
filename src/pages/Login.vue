@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { FormInst, useMessage } from 'naive-ui'
-// import { getUserInfo } from '../api/common'
 const { t } = useI18n()
 
 const loginRef = ref<FormInst | null>(null)
@@ -18,8 +17,6 @@ const rules = {
 	password: { required: true, message: '请输入密码', trigger: 'blur' },
 }
 const onSubmit = () => {
-	// getUserInfo().then((res) => {})
-
 	loginRef.value?.validate((errors) => {
 		if (!errors) {
 			message.success('Valid')
