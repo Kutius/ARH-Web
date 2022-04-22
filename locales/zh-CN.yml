@@ -10,3 +10,10 @@ nesting:
 
 login:
   logo-name: 挂号预约管理系统
+  btn: 立即登录
+  change: 注册账号
+
+register:
+  logo-name: 注册账号
+  btn: 立即注册
+  change: 登录账号

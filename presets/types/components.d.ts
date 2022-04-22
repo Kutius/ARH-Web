@@ -4,8 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    'ICarbon:hazeNight': typeof import('~icons/carbon/haze-night')['default']
-    'ICarbon:lightFilled': typeof import('~icons/carbon/light-filled')['default']
+    'ICarbon:arrowRight': typeof import('~icons/carbon/arrow-right')['default']
     'ICarbon:password': typeof import('~icons/carbon/password')['default']
     'ICarbon:userAvatar': typeof import('~icons/carbon/user-avatar')['default']
     NButton: typeof import('naive-ui')['NButton']
@@ -20,6 +19,8 @@ declare module 'vue' {
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NMenu: typeof import('naive-ui')['NMenu']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+    NSpace: typeof import('naive-ui')['NSpace']
+    NSwitch: typeof import('naive-ui')['NSwitch']
   }
 }
 
