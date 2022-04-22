@@ -31,5 +31,6 @@
 	},
 	"[yaml]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+	"i18n-ally.sourceLanguage": "zh-CN"
 }
