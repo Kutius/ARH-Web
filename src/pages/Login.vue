@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { FormInst, useMessage } from 'naive-ui'
+import { userLogin, userRegister } from '~/api/common'
+
 const { t } = useI18n()
+const router = useRouter()
 
 const loginRef = ref<FormInst | null>(null)
 let loginForm = ref({
@@ -13,21 +16,54 @@ let isRegister = ref(false)
 const message = useMessage()
 
 const rules = {
-	username: { required: true, message: '请输入账号', trigger: 'blur' },
-	password: { required: true, message: '请输入密码', trigger: 'blur' },
+	username: {
+		required: true,
+		message: t('login.rules.username'),
+		trigger: 'blur',
+	},
+	password: {
+		required: true,
+		message: t('login.rules.password'),
+		trigger: 'blur',
+	},
 }
+
+const login = async () => {
+	const { username, password, doctor } = loginForm.value
+	const data = { username, password, doctor }
+	const res = await userLogin(data)
+	if (res.code === 0) {
+		message.success(t('login.success'))
+		router.push('/')
+	} else {
+		message.error(t('login.fail'))
+	}
+}
+
+const register = async () => {
+	const { username, password, doctor } = loginForm.value
+	const data = { username, password, doctor }
+	const res = await userRegister(data)
+	if (res.code === 0) {
+		message.success(t('register.success'))
+		switchSign()
+	} else {
+		message.error(t('register.fail'))
+	}
+}
+
 const onSubmit = () => {
 	loginRef.value?.validate((errors) => {
 		if (!errors) {
-			message.success('Valid')
+			isRegister.value ? register() : login()
 		} else {
 			console.log(errors)
-			message.error('Invalid')
+			message.error(t('login.validate'))
 		}
 	})
 }
 
-const register = () => {
+const switchSign = () => {
 	isRegister.value = !isRegister.value
 	loginForm.value.username = ''
 	loginForm.value.password = ''
@@ -52,10 +88,10 @@ const register = () => {
 			label-placement="left"
 			:show-label="false"
 		>
-			<n-form-item label="账号" path="username">
+			<n-form-item path="username">
 				<n-input
 					v-model:value="loginForm.username"
-					placeholder="请输入账号"
+					:placeholder="t('login.rules.username')"
 					clearable
 				>
 					<template #prefix>
@@ -63,10 +99,10 @@ const register = () => {
 					</template>
 				</n-input>
 			</n-form-item>
-			<n-form-item label="密码" path="password">
+			<n-form-item path="password">
 				<n-input
 					v-model:value="loginForm.password"
-					placeholder="请输入密码"
+					:placeholder="t('login.rules.password')"
 					type="password"
 					show-password-on="mousedown"
 				>
@@ -85,12 +121,12 @@ const register = () => {
 
 	<div class="login-footer">
 		<div class="footer-item">
-			<n-space v-if="!isRegister" class="flex items-center">
+			<n-space v-show="!isRegister" class="flex items-center">
 				<n-switch v-model:value="loginForm.doctor" />
-				医生 / 管理员登录
+				{{ t('login.adminLogin') }}
 			</n-space>
 		</div>
-		<div class="cursor-pointer text-green-500 footer-item" @click="register">
+		<div class="cursor-pointer text-green-500 footer-item" @click="switchSign">
 			{{ isRegister ? t('register.change') : t('login.change') }}
 			<i-carbon:arrow-right />
 		</div>

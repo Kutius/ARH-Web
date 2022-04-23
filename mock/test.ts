@@ -24,6 +24,28 @@ export default [
 		},
 	},
 	{
+		url: '/api/login',
+		method: 'post',
+		timeout: 1500,
+		response: {
+			code: 0,
+			data: {
+				name: 'vben',
+			},
+		},
+	},
+	{
+		url: '/api/register',
+		method: 'post',
+		timeout: 1000,
+		response: {
+			code: 0,
+			data: {
+				name: 'vben',
+			},
+		},
+	},
+	{
 		url: '/api/text',
 		method: 'post',
 		rawResponse: async (req, res) => {

@@ -3,3 +3,9 @@ export interface IResponseData<T> {
 	message?: string
 	data: T
 }
+
+export interface ILoginParams {
+	username: string
+	password: string
+	doctor: boolean
+}

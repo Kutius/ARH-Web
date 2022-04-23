@@ -1,19 +1,23 @@
-# 中文
-
 index: 主页
 about: 关于
 not-found: 未找到页面
-
 nesting:
   sir: 男人
   lady: 女士
-
 login:
   logo-name: 挂号预约管理系统
   btn: 立即登录
   change: 注册账号
-
+  success: 登录成功
+  fail: 密码错误
+  validate: 请输入账号密码
+  rules:
+    username: 请输入账号
+    password: 请输入密码
+  adminLogin: 医生 / 管理员登录
 register:
   logo-name: 注册账号
   btn: 立即注册
   change: 登录账号
+  success: 注册成功
+  fail: 注册失败

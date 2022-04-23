@@ -20,7 +20,7 @@
 	background-size: 100%;
 
 	&-container {
-		border-radius: 10px;
+		border-radius: 15px;
 		padding: 30px 15px;
 		width: 400px;
 		height: 340px;
