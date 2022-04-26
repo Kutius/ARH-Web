@@ -10,10 +10,12 @@ const toggleLocale = () => {
 const language = computed(() => (locale.value === 'zh-CN' ? '中文' : 'English'))
 
 const theme = computed(() => (isDark.value ? 'dark' : 'light'))
+
+const userStore = useUserStore()
 </script>
 
 <template>
-	<div class="m-6">Hello，This is the tov template！！</div>
+	<div class="m-6">Hello，This is {{ userStore.user.username }}！！</div>
 	<div class="cursor-pointer m-6" @click="toggleDark()">theme: {{ theme }}</div>
 
 	<div class="cursor-pointer mt-6 ml-6" @click="toggleLocale()">

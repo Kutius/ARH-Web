@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
 const service = axios.create({
-	baseURL: 'http://localhost:3000',
+	// baseURL: 'http://localhost:3000',
+	baseURL: import.meta.env.BASE_URL,
 })
 
 // 请求拦截器
