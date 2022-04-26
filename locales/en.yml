@@ -6,9 +6,9 @@ nesting:
   lady: lady
 login:
   logo-name: Register & Appoint System
-  adminLogin: Doctor/Admin Login
+  adminLogin: by Doctor/Admin
   btn: LOG IN
-  change: Register an account
+  change: register
   fail: Wrong password
   rules:
     password: Please enter password
@@ -17,7 +17,7 @@ login:
   validate: Please enter account password
 register:
   btn: SIGN UP
-  change: Login account
+  change: login
   fail: Registration failed
   logo-name: Register an account
   success: Register successful
