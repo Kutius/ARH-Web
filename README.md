@@ -1,7 +1,8 @@
 <div align="center">
     <img width="200px" height="200px" src="https://gitee.com/dishait/tov-template/raw/main/public/logo.png" />
-    <h1>tov-template</h1>
-    <p>vite + vue3 + ts 开箱即用现代开发模板</p>
+    <h1>ARH-System</h1>
+    <p>vite + vue3 + ts 医院预约挂号管理系统</p>
+		<small>fork from template <a href='https://github.com/dishait/tov-template'>tov</a></small>
 </div>
 
 <br />
@@ -39,33 +40,6 @@
 28. 统一的代码规范与风格支持
 
 <br />
-<br />
-
-## 克隆模板 🦕
-
-1. Github
-
-```shell
-git clone git@github.com:dishait/tov-template.git
-```
-
-2. Gitee
-
-```shell
-git clone git@gitee.com:dishait/tov-template.git
-```
-
-3. degit
-
-```shell
-npx degit https://github.com/dishait/tov-template#main
-```
-
-4. 新的 `Github` 仓库 👉 [Use this template](https://github.com/dishait/tov-template/generate)
-
-<br />
-<br />
-<br />
 
 ## `node` 版本推荐 🐎
 
@@ -76,8 +50,6 @@ npx degit https://github.com/dishait/tov-template#main
 <br />
 
 ## 使用 🐂
-
-> 该模板不限定大家使用某一特定的包管理器，npm，yarn 和 pnpm 都行。同时注意 npm 的版本应该尽量的新。
 
 强烈推荐大家使用更快更合理的 `pnpm` 包管理器 👉 [安装教程](https://pnpm.io/zh/installation)
 
@@ -255,47 +227,6 @@ pnpm lint:fix
 # 或者 npm run lint:fix
 # 或者 yarn lint:fix
 ```
-
-<br />
-<br />
-
-## 动机 🐗
-
-为什么要做这个 **模板** 呢？
-
-1. 为下次开发节省浪费在配置上的时间
-2. 结合主流插件整合现代开发架构，提高开发效率
-
-<br />
-<br />
-
-## 使用场景 🐻
-
-什么时候你应该用?
-
-1. 不想浪费时间在项目配置上
-2. 希望尝试用更现代的方式开发 `web` 应用，提高开发效率
-
-<br />
-<br />
-
-## 启发 🐃
-
-该模板受 **[vitesse](https://github.com/antfu/vitesse)** 启发，如果你有 SSG 的场景，那么推荐你始终使用 **[vitesse](https://github.com/antfu/vitesse)**。
-
-<br />
-<br />
-
-## 组织 🦔
-
-欢迎关注 **帝莎编程**
-
-- [官网](http://dishaxy.dishait.cn/)
-- [Gitee](https://gitee.com/dishait)
-
-- [Github](https://github.com/dishait)
-
-- [网易云课堂](https://study.163.com/provider/480000001892585/index.htm?share=2&shareId=480000001892585)
 
 <br />
 <br />
