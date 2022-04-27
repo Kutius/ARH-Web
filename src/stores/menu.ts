@@ -86,5 +86,7 @@ export const useMenuStore = defineStore('menus', {
 		}
 	},
 	actions: {},
-	getters: {},
+	getters: {
+		getPatientMenu: () => ['/login', '/'],
+	},
 })

@@ -13,6 +13,7 @@ service.interceptors.request.use(
 	},
 	(error) => {
 		// 当请求失败时做一些处理
+		console.log(error.message)
 		return Promise.reject(error)
 	}
 )

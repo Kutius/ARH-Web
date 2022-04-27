@@ -10,11 +10,10 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 	const userStore = useUserStore()
+
 	if (!userStore.user.isLoggedIn && to.path !== '/login') {
 		next('/login')
-	} else {
-		next()
-	}
+	} else next()
 })
 
 export default (app: App) => app.use(router)
