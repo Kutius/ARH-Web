@@ -1,5 +1,9 @@
 import service from '~/composables/axios'
-import type { IResponseData, ILoginParams } from './types/common'
+import type {
+	IResponseData,
+	ILoginParams,
+	ILoginResponse,
+} from './types/common'
 
 interface IUserInfo {
 	id: number
@@ -14,7 +18,7 @@ export const getUserInfo = () => {
 }
 
 export const userLogin = (data: ILoginParams) => {
-	return service<IResponseData<ILoginParams>>({
+	return service<IResponseData<ILoginResponse>>({
 		method: 'POST',
 		url: '/api/login',
 		data: data,
@@ -22,7 +26,7 @@ export const userLogin = (data: ILoginParams) => {
 }
 
 export const userRegister = (data: ILoginParams) => {
-	return service<IResponseData<ILoginParams>>({
+	return service<IResponseData<ILoginResponse>>({
 		method: 'POST',
 		url: '/api/register',
 		data: data,

@@ -9,3 +9,8 @@ export interface ILoginParams {
 	password: string
 	doctor: boolean
 }
+
+export interface ILoginResponse {
+	username: string
+	uid: string
+}

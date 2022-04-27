@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { FormInst, useMessage } from 'naive-ui'
+import { useRequest } from 'vue-request'
 import { userLogin, userRegister } from '~/api/common'
 
 const { t } = useI18n()
@@ -31,20 +32,34 @@ const rules = {
 // 将用户信息存储到全局store
 const userStore = useUserStore()
 
-const login = async () => {
-	const { username, password, doctor } = loginForm.value
-	const data = { username, password, doctor }
-	const res = await userLogin(data)
-	if (res.code === 0) {
-		userStore.setUser(loginForm.value)
+const { run, loading } = useRequest(userLogin, {
+	onSuccess: (res) => {
+		if (res.code === 0) {
+			userStore.setUser(loginForm.value)
+			message.success(t('login.success'))
+			router.push('/')
+		} else {
+			message.error(res.message || t('login.fail'))
+		}
+	},
+	manual: true,
+})
 
-		message.success(t('login.success'))
-		router.push('/')
-		console.log(userStore.user)
-	} else {
-		message.error(t('login.fail'))
-	}
-}
+const login = () => run(loginForm.value)
+// const login = async () => {
+// 	const { username, password, doctor } = loginForm.value
+// 	const data = { username, password, doctor }
+// 	const res = await userLogin(data)
+
+// 	if (res.code === 0) {
+// 		userStore.setUser(loginForm.value)
+// 		message.success(t('login.success'))
+// 		router.push('/')
+// 		console.log(userStore.user)
+// 	} else {
+// 		message.error(t('login.fail'))
+// 	}
+// }
 
 const register = async () => {
 	const { username, password, doctor } = loginForm.value
@@ -118,7 +133,12 @@ const switchSign = () => {
 				</n-input>
 			</n-form-item>
 			<n-form-item>
-				<n-button type="primary" class="w-full" @click="onSubmit">
+				<n-button
+					type="primary"
+					class="w-full"
+					:loading="loading"
+					@click="onSubmit"
+				>
 					{{ isRegister ? t('register.btn') : t('login.btn') }}
 				</n-button>
 			</n-form-item>
