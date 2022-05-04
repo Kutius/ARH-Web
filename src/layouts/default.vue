@@ -16,17 +16,20 @@
 		>
 			<n-menu
 				:value="selectedKeys"
-				:options="menus.value"
+				:options="currentRoleMenu"
 				:inverted="inverted"
 				:collapsed="collapsed"
 				:collapsed-width="64"
 				:collapsed-icon-size="20"
 				:indent="20"
+				:render-label="renderMenuLabel"
 			/>
 		</n-layout-sider>
 
 		<n-layout>
-			<n-layout-header> header </n-layout-header>
+			<n-layout-header>
+				<Header />
+			</n-layout-header>
 			<n-layout-content>
 				<router-view />
 			</n-layout-content>
@@ -37,7 +40,11 @@
 </template>
 
 <script setup lang="ts">
+import Header from '~/components/header.vue'
 import { useMenuStore } from '~/stores/menu'
+import { MenuOption } from 'naive-ui'
+import { RouterLink } from 'vue-router'
+
 // 监听路由变化
 const currentRoute = useRoute()
 const selectedKeys = ref(currentRoute.name as string)
@@ -48,6 +55,26 @@ watch(currentRoute, (route) => {
 const inverted = ref(true)
 const collapsed = ref(false)
 const menus = useMenuStore()
+
+const userStore = useUserStore()
+
+const currentRoleMenu = computed(() => {
+	return userStore.user.doctor ? menus.value : menus.patient
+})
+
+// 自定义渲染label
+const renderMenuLabel = (option: MenuOption) => {
+	if ('hrefName' in option) {
+		return h(
+			RouterLink,
+			{
+				to: { name: option.hrefName as string },
+			},
+			{ default: () => option.label }
+		)
+	}
+	return option.label as string
+}
 </script>
 
 <style lang="less" scoped>

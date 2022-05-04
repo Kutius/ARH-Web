@@ -37,7 +37,7 @@ const { run, loading } = useRequest(userLogin, {
 		if (res.code === 0) {
 			userStore.setUser(loginForm.value)
 			message.success(t('login.success'))
-			router.push('/')
+			userStore.user.doctor ? router.push('/') : router.push('/patient')
 		} else {
 			message.error(res.message || t('login.fail'))
 		}
