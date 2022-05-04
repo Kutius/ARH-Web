@@ -1,36 +1,31 @@
 import { defineStore } from 'pinia'
-import { RouterLink } from 'vue-router'
+import { NIcon } from 'naive-ui'
+import { Component } from 'vue'
+import CarbonAlignBoxMiddleCenter from '~icons/carbon/align-box-middle-center'
+
+const renderIcon = (icon: Component) => {
+	return () => h(NIcon, null, { default: () => h(icon) })
+}
 
 export const useMenuStore = defineStore('menus', {
 	state: () => {
 		return {
 			value: [
 				{
-					label: () =>
-						h(
-							RouterLink,
-							{
-								to: { name: 'Index' },
-							},
-							{ default: () => '首页' }
-						),
+					icon: renderIcon(CarbonAlignBoxMiddleCenter),
+					label: '首页',
+					hrefName: 'Index',
 					key: 'Index',
 				},
 				{
-					label: () =>
-						h(
-							RouterLink,
-							{
-								to: {
-									name: 'test',
-									// params: {
-									// 	lang: 'zh-CN',
-									// },
-								},
-							},
-							{ default: () => '回家' }
-						),
+					label: '回家',
+					hrefName: 'test',
 					key: 'test',
+				},
+				{
+					label: '病人首页',
+					hrefName: 'patient-Index',
+					key: 'patient-Index',
 				},
 				{
 					label: '寻羊冒险记',
@@ -81,6 +76,13 @@ export const useMenuStore = defineStore('menus', {
 							key: 'the-past-increases-the-future-recedes',
 						},
 					],
+				},
+			],
+			patient: [
+				{
+					label: '病人首页',
+					hrefName: 'patient-Index',
+					key: 'patient-Index',
 				},
 			],
 		}
