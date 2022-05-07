@@ -9,7 +9,6 @@
 			:width="200"
 			show-trigger="bar"
 			:inverted="inverted"
-			bordered
 			class="layout-sider"
 			@collapse="collapsed = true"
 			@expand="collapsed = false"
@@ -28,7 +27,7 @@
 
 		<n-layout>
 			<n-layout-header>
-				<Header />
+				<Header v-model:collapsed="collapsed" />
 			</n-layout-header>
 			<n-layout-content>
 				<router-view />

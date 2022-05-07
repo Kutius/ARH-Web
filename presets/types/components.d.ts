@@ -5,13 +5,21 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Footer: typeof import('./../../src/components/footer.vue')['default']
+    Header: typeof import('./../../src/components/header.vue')['default']
     'ICarbon:arrowRight': typeof import('~icons/carbon/arrow-right')['default']
+    'ICarbon:folderDetails': typeof import('~icons/carbon/folder-details')['default']
+    'ICarbon:folderDetailsReference': typeof import('~icons/carbon/folder-details-reference')['default']
+    'ICarbon:logout': typeof import('~icons/carbon/logout')['default']
     'ICarbon:password': typeof import('~icons/carbon/password')['default']
+    'ICarbon:restart': typeof import('~icons/carbon/restart')['default']
     'ICarbon:userAvatar': typeof import('~icons/carbon/user-avatar')['default']
     NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
+    NGradientText: typeof import('naive-ui')['NGradientText']
+    NIcon: typeof import('naive-ui')['NIcon']
     NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
@@ -22,6 +30,7 @@ declare module '@vue/runtime-core' {
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NSpace: typeof import('naive-ui')['NSpace']
     NSwitch: typeof import('naive-ui')['NSwitch']
+    NTooltip: typeof import('naive-ui')['NTooltip']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
