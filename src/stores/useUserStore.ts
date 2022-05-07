@@ -8,9 +8,9 @@ interface IUserStore extends ILoginParams {
 export default defineStore('userStore', {
 	state() {
 		return {
-			user: useLocalStorage('user-profile', {
+			user: {
 				isLoggedIn: false,
-			} as IUserStore),
+			} as IUserStore,
 		}
 	},
 	getters: {},
@@ -20,4 +20,5 @@ export default defineStore('userStore', {
 			this.user.isLoggedIn = true
 		},
 	},
+	persist: true,
 })
