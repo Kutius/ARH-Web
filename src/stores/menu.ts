@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia'
 import { NIcon } from 'naive-ui'
 import { Component } from 'vue'
-import CarbonAlignBoxMiddleCenter from '~icons/carbon/align-box-middle-center'
+import {
+	DocumentOnePage24Regular as DocumentIcon,
+	HeartCircle24Regular as HeartIcon,
+	PersonInfo20Regular as InfoIcon,
+	Stethoscope24Regular as ReserveIcon,
+	History24Regular as HistoryIcon,
+} from '@vicons/fluent'
 
 const renderIcon = (icon: Component) => {
 	return () => h(NIcon, null, { default: () => h(icon) })
@@ -12,7 +18,7 @@ export const useMenuStore = defineStore('menus', {
 		return {
 			value: [
 				{
-					icon: renderIcon(CarbonAlignBoxMiddleCenter),
+					icon: renderIcon(DocumentIcon),
 					label: '首页',
 					hrefName: 'Index',
 					key: 'Index',
@@ -80,9 +86,34 @@ export const useMenuStore = defineStore('menus', {
 			],
 			patient: [
 				{
+					icon: renderIcon(DocumentIcon),
 					label: '病人首页',
 					hrefName: 'patient-Index',
 					key: 'patient-Index',
+				},
+				{
+					icon: renderIcon(ReserveIcon),
+					label: '预约挂号',
+					hrefName1: 'patient-appointment',
+					key: 'patient-appointment',
+				},
+				{
+					icon: renderIcon(HeartIcon),
+					label: '核酸检测',
+					hrefName1: 'patient-covid-detection',
+					key: 'patient-covid-detection',
+				},
+				{
+					icon: renderIcon(InfoIcon),
+					label: '信息管理',
+					hrefName1: 'patient-space',
+					key: 'patient-space',
+				},
+				{
+					icon: renderIcon(HistoryIcon),
+					label: '预约记录',
+					hrefName1: 'patient-appointment-history',
+					key: 'patient-appointment-history',
 				},
 			],
 		}
