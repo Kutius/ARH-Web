@@ -30,7 +30,9 @@
 				<Header v-model:collapsed="collapsed" />
 			</n-layout-header>
 			<n-layout-content>
-				<router-view />
+				<div class="bg-dark-900/6">
+					<router-view />
+				</div>
 			</n-layout-content>
 			<!-- <n-back-top :right="100" /> -->
 			<n-layout-footer>footer</n-layout-footer>
