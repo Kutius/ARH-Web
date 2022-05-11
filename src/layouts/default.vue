@@ -44,6 +44,8 @@ import { useMenuStore } from '~/stores/menu'
 import { MenuOption } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 
+const { t } = useI18n()
+
 // 监听路由变化
 const currentRoute = useRoute()
 const selectedKeys = ref(currentRoute.name as string)
@@ -69,10 +71,10 @@ const renderMenuLabel = (option: MenuOption) => {
 			{
 				to: { name: option.hrefName as string },
 			},
-			{ default: () => option.label }
+			{ default: () => t(option.label as string) }
 		)
 	}
-	return option.label as string
+	return t(option.label as string)
 }
 </script>
 

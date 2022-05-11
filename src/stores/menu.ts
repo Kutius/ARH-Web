@@ -12,9 +12,6 @@ import {
 const renderIcon = (icon: Component) => {
 	return () => h(NIcon, null, { default: () => h(icon) })
 }
-
-const { t } = useI18n()
-
 export const useMenuStore = defineStore('menus', {
 	state: () => {
 		return {
@@ -89,31 +86,31 @@ export const useMenuStore = defineStore('menus', {
 			patient: [
 				{
 					icon: renderIcon(DocumentIcon),
-					label: t('menu.index'),
+					label: 'menu.index',
 					hrefName: 'patient-Index',
 					key: 'patient-Index',
 				},
 				{
 					icon: renderIcon(ReserveIcon),
-					label: t('menu.appointment'),
+					label: 'menu.appointment',
 					hrefName1: 'patient-appointment',
 					key: 'patient-appointment',
 				},
 				{
 					icon: renderIcon(HeartIcon),
-					label: t('menu.covid-detection'),
+					label: 'menu.covid-detection',
 					hrefName1: 'patient-covid-detection',
 					key: 'patient-covid-detection',
 				},
 				{
 					icon: renderIcon(InfoIcon),
-					label: t('menu.space'),
+					label: 'menu.space',
 					hrefName1: 'patient-space',
 					key: 'patient-space',
 				},
 				{
 					icon: renderIcon(HistoryIcon),
-					label: t('menu.history'),
+					label: 'menu.history',
 					hrefName1: 'patient-appointment-history',
 					key: 'patient-appointment-history',
 				},
