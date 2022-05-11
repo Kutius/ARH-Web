@@ -21,3 +21,14 @@ register:
   change: 登录账号
   success: 注册成功
   fail: 注册失败
+header:
+  refresh: 刷新
+  user: 个人信息
+  logout: 退出登录
+  language: 切换语言
+menu:
+  index: 病人首页
+  appointment: 预约挂号
+  covid-detection: 核酸检测
+  space: 信息管理
+  history: 预约记录

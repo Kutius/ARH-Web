@@ -21,3 +21,14 @@ register:
   fail: Registration failed
   logo-name: Register an account
   success: Register successful
+menu:
+  appointment: Appointment
+  covid-detection: Covid Detection
+  history: Appoint History
+  index: Index
+  space: Space
+header:
+  language: switch language
+  logout: log out
+  refresh: reload
+  user: user space

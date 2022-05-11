@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const { t, locale } = useI18n()
+
+const { isDark, toggleDark } = useDarks()
 /* eslint-disable no-undef */
 defineProps({
 	collapsed: Boolean,
@@ -19,8 +22,10 @@ const refreshPage = () => {
 	})
 }
 
-const redirectSpace = () => {
-	router.push(currentRoute.fullPath + '/space')
+const redirectSpace = () => router.push(currentRoute.fullPath + '/space')
+
+const toggleLocale = () => {
+	locale.value = locale.value === 'zh-CN' ? 'en' : 'zh-CN'
 }
 </script>
 
@@ -42,35 +47,54 @@ const redirectSpace = () => {
 			<!-- 刷新 -->
 			<n-tooltip placement="bottom">
 				<template #trigger>
-					<div class="header-box-trigger" @click="refreshPage">
+					<div class="header-box-trigger" @click="refreshPage()">
 						<n-icon size="18">
 							<i-carbon:restart />
 						</n-icon>
 					</div>
 				</template>
-				刷新
+				{{ t('header.refresh') }}
 			</n-tooltip>
 		</div>
+
 		<div class="header-box-right">
+			<div class="header-box-trigger" @click="toggleDark()">
+				<n-icon v-if="isDark" size="18">
+					<i-carbon:light-filled />
+				</n-icon>
+				<n-icon v-else size="18">
+					<i-carbon:moon />
+				</n-icon>
+			</div>
 			<n-tooltip placement="bottom">
 				<template #trigger>
-					<div class="header-box-trigger" @click="redirectSpace">
+					<div class="header-box-trigger" @click="toggleLocale()">
+						<n-icon size="18">
+							<i-carbon:language />
+						</n-icon>
+					</div>
+				</template>
+				{{ t('header.language') }}
+			</n-tooltip>
+			<n-tooltip placement="bottom">
+				<template #trigger>
+					<div class="header-box-trigger" @click="redirectSpace()">
 						<n-gradient-text type="info">
 							{{ userStore.user.username }}
 						</n-gradient-text>
 					</div>
 				</template>
-				个人信息
+				{{ t('header.user') }}
 			</n-tooltip>
 			<n-tooltip placement="bottom">
 				<template #trigger>
-					<div class="header-box-trigger" @click="logOut">
+					<div class="header-box-trigger" @click="logOut()">
 						<n-icon size="18">
 							<i-carbon:logout />
 						</n-icon>
 					</div>
 				</template>
-				退出登录
+				{{ t('header.logout') }}
 			</n-tooltip>
 		</div>
 	</div>

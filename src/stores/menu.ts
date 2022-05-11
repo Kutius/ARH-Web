@@ -13,6 +13,8 @@ const renderIcon = (icon: Component) => {
 	return () => h(NIcon, null, { default: () => h(icon) })
 }
 
+const { t } = useI18n()
+
 export const useMenuStore = defineStore('menus', {
 	state: () => {
 		return {
@@ -87,31 +89,31 @@ export const useMenuStore = defineStore('menus', {
 			patient: [
 				{
 					icon: renderIcon(DocumentIcon),
-					label: '病人首页',
+					label: t('menu.index'),
 					hrefName: 'patient-Index',
 					key: 'patient-Index',
 				},
 				{
 					icon: renderIcon(ReserveIcon),
-					label: '预约挂号',
+					label: t('menu.appointment'),
 					hrefName1: 'patient-appointment',
 					key: 'patient-appointment',
 				},
 				{
 					icon: renderIcon(HeartIcon),
-					label: '核酸检测',
+					label: t('menu.covid-detection'),
 					hrefName1: 'patient-covid-detection',
 					key: 'patient-covid-detection',
 				},
 				{
 					icon: renderIcon(InfoIcon),
-					label: '信息管理',
+					label: t('menu.space'),
 					hrefName1: 'patient-space',
 					key: 'patient-space',
 				},
 				{
 					icon: renderIcon(HistoryIcon),
-					label: '预约记录',
+					label: t('menu.history'),
 					hrefName1: 'patient-appointment-history',
 					key: 'patient-appointment-history',
 				},
