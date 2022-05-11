@@ -3,6 +3,7 @@ import type {
 	IResponseData,
 	ILoginParams,
 	ILoginResponse,
+	INoticeResponse,
 } from './types/common'
 
 interface IUserInfo {
@@ -30,5 +31,12 @@ export const userRegister = (data: ILoginParams) => {
 		method: 'POST',
 		url: '/api/register',
 		data: data,
+	})
+}
+
+export const getNotice = () => {
+	return service<IResponseData<INoticeResponse>>({
+		method: 'GET',
+		url: '/api/notice',
 	})
 }

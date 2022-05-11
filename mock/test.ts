@@ -46,6 +46,16 @@ export default [
 		},
 	},
 	{
+		url: '/api/notice',
+		method: 'get',
+		response: {
+			code: 0,
+			data: {
+				content: 'hello world',
+			},
+		},
+	},
+	{
 		url: '/api/text',
 		method: 'post',
 		rawResponse: async (req, res) => {

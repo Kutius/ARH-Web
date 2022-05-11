@@ -14,3 +14,7 @@ export interface ILoginResponse {
 	username: string
 	uid: string
 }
+
+export interface INoticeResponse {
+	content: string
+}
