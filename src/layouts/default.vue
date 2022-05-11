@@ -30,11 +30,11 @@
 				<Header v-model:collapsed="collapsed" />
 			</n-layout-header>
 			<n-layout-content>
-				<div class="bg-dark-900/6">
+				<div class="bg-dark-900/6 pt-2 pl-3 pr-3">
 					<router-view />
 				</div>
 			</n-layout-content>
-			<!-- <n-back-top :right="100" /> -->
+			<n-back-top :right="100" />
 			<n-layout-footer>footer</n-layout-footer>
 		</n-layout>
 	</n-layout>
