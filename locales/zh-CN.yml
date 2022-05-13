@@ -32,3 +32,13 @@ menu:
   covid-detection: 核酸检测
   space: 信息管理
   history: 预约记录
+patient:
+  index:
+    good-morning: 早上好
+    good-noon: 中午好
+    good-afternood: 下午好
+    good-night: 晚上好
+    notice-content: 暂无公告
+    statistic:
+      appoint: 已预约挂号
+      covid-detection: 已预约核酸

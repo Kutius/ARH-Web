@@ -2,16 +2,17 @@
 import { useRequest } from 'vue-request'
 import { getNotice } from '~/api/common'
 
+const { t } = useI18n()
 const period = new Date().getHours()
 const greets = computed(() => {
 	if (period >= 7 && period <= 11) {
-		return '早上好'
+		return t('patient.index.good-morning')
 	} else if (period >= 12 && period <= 14) {
-		return '中午好'
+		return t('patient.index.good-noon')
 	} else if (period >= 15 && period <= 18) {
-		return '下午好'
+		return t('patient.index.good-afternood')
 	} else if (period >= 19 || period <= 6) {
-		return '晚上好'
+		return t('patient.index.good-night')
 	}
 })
 
@@ -36,7 +37,7 @@ const { data } = useRequest(getNotice)
 					</template>
 				</n-button>
 			</template>
-			{{ data?.data.content || '暂无公告' }}
+			{{ data?.data.content || t('patient.index.notice-content') }}
 			<template #action>
 				<n-space>
 					<n-button size="small"> 1 块钱 </n-button>
@@ -44,8 +45,12 @@ const { data } = useRequest(getNotice)
 			</template>
 			<template #footer>
 				<div class="data-number">
-					<n-statistic label="已预约挂号"> 99 </n-statistic>
-					<n-statistic label="已预约核酸"> 99 </n-statistic>
+					<n-statistic :label="t('patient.index.statistic.appoint')">
+						99
+					</n-statistic>
+					<n-statistic :label="t('patient.index.statistic.covid-detection')">
+						99
+					</n-statistic>
 				</div>
 			</template>
 		</n-thing>

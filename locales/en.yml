@@ -32,3 +32,13 @@ header:
   logout: log out
   refresh: reload
   user: user space
+patient:
+  index:
+    good-afternood: Good Afternoon!
+    good-morning: Good Morning!
+    good-night: Good-Night!
+    good-noon: Good Noon!
+    notice-content: No Notice
+    statistic:
+      appoint: Appointed
+      covid-detection: Covid Detected
