@@ -78,7 +78,7 @@
     "vite-plugin-use-modules": "^1.1.0",
     "vite-plugin-vue-meta-layouts": "^0.0.9",
     "vite-plugin-windicss": "^1.8.4",
-    "vitest": "^0.12.4",
+    "vitest": "^0.12.6",
     "vue-i18n": "^9.1.10",
     "vue-request": "^1.2.4",
     "vue-router": "^4.0.15",
