@@ -20,7 +20,7 @@ const { data } = useRequest(getNotice)
 </script>
 
 <template>
-	<n-card>
+	<n-card hoverable>
 		<n-thing>
 			<template #avatar>
 				<n-avatar>
