@@ -30,18 +30,21 @@
 				<Header v-model:collapsed="collapsed" />
 			</n-layout-header>
 			<n-layout-content>
-				<div class="bg-dark-900/6 pt-2 pl-3 pr-3">
+				<div class="bg-dark-900/6 pt-2 pl-3 pr-3 min-h-screen">
 					<router-view />
 				</div>
+				<n-back-top />
 			</n-layout-content>
-			<n-back-top :right="100" />
-			<n-layout-footer>footer</n-layout-footer>
+			<n-layout-footer>
+				<Footer />
+			</n-layout-footer>
 		</n-layout>
 	</n-layout>
 </template>
 
 <script setup lang="ts">
 import Header from '~/components/header.vue'
+import Footer from '~/components/footer.vue'
 import { useMenuStore } from '~/stores/menu'
 import { MenuOption } from 'naive-ui'
 import { RouterLink } from 'vue-router'
