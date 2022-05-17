@@ -56,6 +56,35 @@ export default [
 		},
 	},
 	{
+		url: '/api/apmtDetail',
+		method: 'post',
+		response: {
+			code: 0,
+			data: {
+				apmt: [
+					{
+						id: 20220517123,
+						doctorName: '张三',
+						doctorJob: '主任医师',
+						date: 1652716800000,
+						startTime: '7:30',
+						endTime: '11:00',
+						isProfessional: true,
+					},
+					{
+						id: 20220517821,
+						doctorName: '李四',
+						doctorJob: '实习医师',
+						date: 1652803200000,
+						startTime: '13:30',
+						endTime: '18:00',
+						isProfessional: false,
+					},
+				],
+			},
+		},
+	},
+	{
 		url: '/api/text',
 		method: 'post',
 		rawResponse: async (req, res) => {
