@@ -93,8 +93,8 @@ export const useMenuStore = defineStore('menus', {
 				{
 					icon: renderIcon(ReserveIcon),
 					label: 'menu.appointment',
-					hrefName1: 'patient-appointment',
-					key: 'patient-appointment',
+					hrefName: 'patient-Appointment',
+					key: 'patient-Appointment',
 				},
 				{
 					icon: renderIcon(HeartIcon),
