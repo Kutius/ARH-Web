@@ -1,11 +1,10 @@
 <template>
 	<!-- <router-view /> -->
-	<n-layout has-sider class="layout">
+	<n-layout has-sider class="layout" position="absolute">
 		<n-layout-sider
 			:collapsed="collapsed"
 			collapse-mode="width"
 			:collapsed-width="64"
-			position="static"
 			:width="200"
 			show-trigger="bar"
 			:inverted="inverted"
@@ -30,7 +29,9 @@
 				<Header v-model:collapsed="collapsed" />
 			</n-layout-header>
 			<n-layout-content>
-				<div class="bg-dark-900/6 pt-2 pl-3 pr-3 min-h-screen">
+				<div
+					class="bg-dark-900/6 pt-2 pb-4 pl-3 pr-3 min-h-[calc(100vh-60px-2rem)]"
+				>
 					<router-view />
 				</div>
 				<n-back-top />
