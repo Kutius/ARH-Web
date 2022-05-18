@@ -106,6 +106,7 @@
     "unrefElement": true,
     "until": true,
     "useActiveElement": true,
+    "useApmt": true,
     "useAsyncQueue": true,
     "useAsyncState": true,
     "useAttrs": true,

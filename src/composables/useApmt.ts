@@ -1,7 +1,6 @@
 import { CascaderOption } from 'naive-ui'
 import type { IApmtDetail } from '~/api/types/patient'
 
-let department = ref(null)
 const options: CascaderOption[] = [
 	{
 		value: 'nei-ke',
@@ -56,16 +55,33 @@ const options: CascaderOption[] = [
 		],
 	},
 ]
+let department = ref<string | null>(null)
 let timestamp = ref<number | null>(null)
+let timeChoose = ref<number | null>(null)
+
+let apmtList = ref<IApmtDetail[]>([])
+
+const _DAY = 86400000
+
 const resetData = () => {
 	timestamp.value = null
 	department.value = null
+	timeChoose.value = null
 }
 
-const _DAY = 86400000
 const disablePreviousDate = (ts: number) =>
 	ts < Date.now() - _DAY || !apmtList.value.some((e) => e.date === ts)
-let apmtList = ref<IApmtDetail[]>([])
+
+const timestampToTime = (ts: number) => {
+	const date = new Date(ts)
+	const Y = date.getFullYear() + '-'
+	const M =
+		(date.getMonth() + 1 < 10
+			? '0' + (date.getMonth() + 1)
+			: date.getMonth() + 1) + '-'
+	const D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ''
+	return Y + M + D
+}
 
 export default () => ({
 	department,
@@ -74,4 +90,6 @@ export default () => ({
 	resetData,
 	disablePreviousDate,
 	apmtList,
+	timeChoose,
+	timestampToTime
 })
