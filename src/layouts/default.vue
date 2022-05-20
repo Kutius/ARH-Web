@@ -26,7 +26,7 @@
 
 		<n-layout>
 			<n-layout-header>
-				<Header v-model:collapsed="collapsed" />
+				<Navi v-model:collapsed="collapsed" />
 			</n-layout-header>
 			<n-layout-content>
 				<div
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import Header from '~/components/header.vue'
+import Navi from '~/components/Navigation.vue'
 import Footer from '~/components/footer.vue'
 import { useMenuStore } from '~/stores/menu'
 import { MenuOption } from 'naive-ui'
