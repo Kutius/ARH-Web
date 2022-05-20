@@ -46,10 +46,10 @@ const { data } = useRequest(getNotice)
 			<template #footer>
 				<div class="data-number">
 					<n-statistic :label="t('patient.index.statistic.appoint')">
-						99
+						<n-number-animation :from="0" :to="99" />
 					</n-statistic>
 					<n-statistic :label="t('patient.index.statistic.covid-detection')">
-						99
+						<n-number-animation :from="0" :to="17" />
 					</n-statistic>
 				</div>
 			</template>

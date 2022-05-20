@@ -99,8 +99,8 @@ export const useMenuStore = defineStore('menus', {
 				{
 					icon: renderIcon(HeartIcon),
 					label: 'menu.covid-detection',
-					hrefName1: 'patient-covid-detection',
-					key: 'patient-covid-detection',
+					hrefName: 'patient-CovidDetection',
+					key: 'patient-CovidDetection',
 				},
 				{
 					icon: renderIcon(InfoIcon),
