@@ -26,7 +26,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "vue": "^3.2.34"
+    "vue": "^3.2.35"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.5",
@@ -43,7 +43,7 @@
     "@vueuse/core": "^8.5.0",
     "axios": "^0.27.2",
     "c8": "^7.11.3",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.7.1",
@@ -78,7 +78,7 @@
     "vite-plugin-use-modules": "^1.1.0",
     "vite-plugin-vue-meta-layouts": "^0.0.9",
     "vite-plugin-windicss": "^1.8.4",
-    "vitest": "^0.12.6",
+    "vitest": "^0.12.9",
     "vue-i18n": "^9.1.10",
     "vue-request": "^1.2.4",
     "vue-router": "^4.0.15",
