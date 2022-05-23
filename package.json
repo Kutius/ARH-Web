@@ -26,7 +26,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "vue": "^3.2.35"
+    "vue": "^3.2.36"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.5",
@@ -82,7 +82,7 @@
     "vue-i18n": "^9.1.10",
     "vue-request": "^1.2.4",
     "vue-router": "^4.0.15",
-    "vue-tsc": "^0.34.15",
+    "vue-tsc": "^0.34.16",
     "windicss": "^3.5.4",
     "windicss-analysis": "^0.3.5"
   },
