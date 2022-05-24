@@ -105,14 +105,14 @@ export const useMenuStore = defineStore('menus', {
 				{
 					icon: renderIcon(InfoIcon),
 					label: 'menu.space',
-					hrefName1: 'patient-space',
-					key: 'patient-space',
+					hrefName: 'patient-Space',
+					key: 'patient-Space',
 				},
 				{
 					icon: renderIcon(HistoryIcon),
 					label: 'menu.history',
-					hrefName1: 'patient-appointment-history',
-					key: 'patient-appointment-history',
+					hrefName: 'patient-History',
+					key: 'patient-History',
 				},
 			],
 		}
