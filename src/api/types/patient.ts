@@ -51,6 +51,15 @@ export interface IAppointData {
 	status: string
 }
 
+export interface ICovidData {
+	appointTime: string
+	status: string
+}
+
 export interface IApmtHistoryResponse {
 	history: IAppointData[]
+}
+
+export interface ICovidHistoryResponse {
+	history: ICovidData[]
 }

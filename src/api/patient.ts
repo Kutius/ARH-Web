@@ -7,6 +7,7 @@ import type {
 	ISubmitCovidDetectionResponse,
 	IUserId,
 	IApmtHistoryResponse,
+	ICovidHistoryResponse
 } from './types/patient'
 
 export const apmtDetail = () => {
@@ -35,6 +36,14 @@ export const apmtHistory = (data: IUserId) => {
 	return service<IResponseData<IApmtHistoryResponse>>({
 		method: 'POST',
 		url: '/api/apmtHistory',
+		data: data,
+	})
+}
+
+export const covidHistory = (data: IUserId) => {
+	return service<IResponseData<ICovidHistoryResponse>>({
+		method: 'POST',
+		url: '/api/covidHistory',
 		data: data,
 	})
 }
