@@ -35,3 +35,22 @@ export interface IDetectFormParams {
 	detectType: null | string
 	price: null | string
 }
+
+export interface ISubmitCovidDetectionResponse {
+	result: string
+}
+
+export interface IUserId {
+	uid: string
+}
+
+export interface IAppointData {
+	id: string
+	doctorName: string
+	appointTime: string
+	status: string
+}
+
+export interface IApmtHistoryResponse {
+	history: IAppointData[]
+}

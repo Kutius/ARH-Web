@@ -99,6 +99,35 @@ export default [
 		},
 	},
 	{
+		url: '/api/apmtHistory',
+		method: 'post',
+		response: {
+			code: 0,
+			data: {
+				history: [
+					{
+						id: '11123213',
+						doctorName: 'Zhangzsn',
+						appointTime: '2022-01-01',
+						status: '已完成',
+					},
+					{
+						id: '11198492',
+						doctorName: 'Jack',
+						appointTime: '2022-02-01',
+						status: '已完成',
+					},
+					{
+						id: '18243213',
+						doctorName: 'Lisa',
+						appointTime: '2022-03-01',
+						status: '坐诊中',
+					},
+				],
+			},
+		},
+	},
+	{
 		url: '/api/text',
 		method: 'post',
 		rawResponse: async (req, res) => {

@@ -4,6 +4,9 @@ import type {
 	IApmtDetailResponse,
 	ISpaceInfoResponse,
 	IDetectFormParams,
+	ISubmitCovidDetectionResponse,
+	IUserId,
+	IApmtHistoryResponse,
 } from './types/patient'
 
 export const apmtDetail = () => {
@@ -21,9 +24,17 @@ export const userSpace = () => {
 }
 
 export const submitCovidDetection = (data: IDetectFormParams) => {
-	return service<IResponseData<ISpaceInfoResponse>>({
+	return service<IResponseData<ISubmitCovidDetectionResponse>>({
 		method: 'POST',
 		url: '/api/submitCovidDetection',
+		data: data,
+	})
+}
+
+export const apmtHistory = (data: IUserId) => {
+	return service<IResponseData<IApmtHistoryResponse>>({
+		method: 'POST',
+		url: '/api/apmtHistory',
 		data: data,
 	})
 }
