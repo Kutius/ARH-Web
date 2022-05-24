@@ -1,33 +1,76 @@
 <script lang="ts" setup>
-import { FormInst, useMessage } from 'naive-ui'
+import { useMessage, SelectOption } from 'naive-ui'
+import { submitCovidDetection } from '~/api/patient'
 
 const message = useMessage()
-
-const showTips = ref<boolean>(true)
-
-const formRef = ref<FormInst | null>(null)
-const surveyForm = ref({
-	v1: null,
-	v2: null,
-	v3: null,
-	v4: null,
-	v5: null,
-	v6: null,
-})
+const {
+	surveyForm,
+	showSurvey,
+	detectForm,
+	showTips,
+	surveyFormRef,
+	detectFormRef,
+} = useCovidDt()
 
 const covidSafe = computed(() => {
 	const { v1, v2, v3, v4, v5, v6 } = surveyForm.value
-	return [v1, v2, v3, v4, v5, v6].every((item) => item === 'true')
+	return [v1, v2, v3, v4, v5, v6].every((item) => item === 'false')
 })
 
-const submitSurvey = () => {
+const validateSurvey = () => {
 	console.log(surveyForm.value)
 	if (covidSafe.value) {
-		message.success('验证成功')
+		showSurvey.value = false
 	} else {
-		message.error('验证失败')
+		message.error('信息异常，请联系医院')
 	}
 }
+const submitDetect = () => {
+	detectFormRef.value?.validate((errors) => {
+		if (!errors) {
+			submitCovidDetection(detectForm.value)
+				.then(() => {
+					message.success('提交成功')
+				})
+				.catch((err) => {
+					message.error(err.message)
+				})
+		}
+	})
+}
+
+const rules = {
+	arriveDate: {
+		required: true,
+		message: '请选择到达时间',
+	},
+	detectType: {
+		required: true,
+		message: '请选择检测类型',
+	},
+}
+
+const disablePreviousDate = (ts: number) => ts < Date.now()
+
+interface IDetectTypeOptions extends SelectOption {
+	label: '单检' | '混检'
+	value: 'solo' | 'mix'
+	price: string
+}
+const detectTypeOptions: IDetectTypeOptions[] = [
+	{ label: '单检', value: 'solo', price: '50' },
+	{ label: '混检', value: 'mix', price: '10' },
+]
+
+const handleUpdateType = (_: string, option: IDetectTypeOptions) => {
+	detectForm.value.price = option.price
+}
+
+// 用户信息判断
+const userFlag = useUserFlag()
+onMounted(() => {
+	userFlag.getUserSpace()
+})
 </script>
 
 <template>
@@ -46,8 +89,9 @@ const submitSurvey = () => {
 				<n-text type="warning"> 为了保障您和他人的健康，请如实填写 </n-text>
 			</template>
 		</n-card>
-		<n-card size="huge">
-			<n-form ref="formRef" :model="surveyForm" label-placement="top">
+		<!-- 流调问卷 -->
+		<n-card v-if="showSurvey" size="huge">
+			<n-form ref="surveyFormRef" :model="surveyForm" label-placement="top">
 				<n-grid :cols="24" :x-gap="24">
 					<n-form-item-gi
 						label="1.近三天是否发热（体温>37.3℃）"
@@ -130,7 +174,61 @@ const submitSurvey = () => {
 			</template>
 			<template #action>
 				<div class="flex justify-around">
-					<n-button type="primary" @click="submitSurvey()"> 我已确认 </n-button>
+					<n-button type="primary" @click="validateSurvey()">
+						我已确认
+					</n-button>
+				</div>
+			</template>
+		</n-card>
+		<!-- 核酸预约 -->
+		<n-card
+			v-else
+			title="核酸检测预约"
+			size="large"
+			content-style="padding-left: 80px; padding-right: 80px;"
+		>
+			<n-space vertical :size="[0, 40]">
+				<n-alert v-show="!userFlag.flag.value" title="警告" type="warning">
+					您的个人身份信息尚未完善，请先完善后再预约。
+				</n-alert>
+				<n-form
+					ref="detectFormRef"
+					:model="detectForm"
+					:rules="rules"
+					label-width="auto"
+					label-placement="left"
+					label-align="left"
+				>
+					<n-form-item label="预约到院日期" path="arriveDate">
+						<n-date-picker
+							v-model:value="detectForm.arriveDate"
+							placeholder="请选择预约到院日期"
+							type="date"
+							:is-date-disabled="disablePreviousDate"
+						/>
+					</n-form-item>
+					<n-form-item label="检测类型" path="detectType">
+						<n-select
+							v-model:value="detectForm.detectType"
+							placeholder="请选择检测方式"
+							:options="detectTypeOptions"
+							@update:value="handleUpdateType"
+						/>
+					</n-form-item>
+					<n-form-item label="预约金额" path="price">
+						<n-input
+							v-model:value="detectForm.price"
+							placeholder="选择检测方式后自动识别"
+							disabled
+						>
+							<template #suffix> 元 </template>
+						</n-input>
+					</n-form-item>
+				</n-form>
+			</n-space>
+			<template #action>
+				<div class="flex justify-around">
+					<n-button type="primary" @click="submitDetect()"> 提交 </n-button>
 				</div>
 			</template>
 		</n-card>

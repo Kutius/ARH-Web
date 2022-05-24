@@ -29,3 +29,9 @@ export interface ISpaceInfoResponse {
 	idNumber: string
 	sex: sex
 }
+
+export interface IDetectFormParams {
+	arriveDate: null | number
+	detectType: null | string
+	price: null | string
+}
