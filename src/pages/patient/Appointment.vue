@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { apmtDetail, userSpace } from '~/api/patient'
+import { apmtDetail } from '~/api/patient'
 import { StepsProps, useMessage } from 'naive-ui'
 
 const {
@@ -15,10 +15,13 @@ const {
 
 const message = useMessage()
 
+// 获取用户信息
+const userFlag = useUserFlag()
+
 // 加载列表数据
 onMounted(() => {
 	getApmt()
-	getUserSpace()
+	userFlag.getUserSpace(() => (stepStatus.value = 'error'))
 })
 
 // 获取排班信息
@@ -26,18 +29,6 @@ const getApmt = async () => {
 	const res = await apmtDetail()
 	if (res.code === 0) {
 		apmtList.value = res.data.apmt
-	}
-}
-
-// 获取用户信息
-const userFlag = ref<boolean>(false)
-const getUserSpace = async () => {
-	const res = await userSpace()
-	if (res.code === 0) {
-		if (!(res.data.name && res.data.idNumber)) {
-			userFlag.value = true
-			stepStatus.value = 'error'
-		}
 	}
 }
 
@@ -77,7 +68,7 @@ const stepStatus = ref<StepsProps['status']>('process')
 
 // 步骤条文案
 const finalText = computed(() =>
-	userFlag.value ? '请先完善个人信息' : '提交成功'
+	userFlag.flag.value ? '请先完善个人信息' : '提交成功'
 )
 
 const isCompleted = computed(
@@ -145,16 +136,22 @@ const submit = () => {
 							{{ department }}
 						</n-descriptions-item>
 						<n-descriptions-item label="日期">
-							{{ timestampToTime(timestamp as number) }}
+							{{ timestampToTime(timestamp!) }}
 						</n-descriptions-item>
 						<n-descriptions-item label="时间">
-							{{findApmt(timeChoose as number)?.label}}
+							{{findApmt(timeChoose!)?.label}}
 						</n-descriptions-item>
 					</n-descriptions>
 					<template #action>
 						<div class="flex justify-around">
 							<n-button type="warning" @click="goSpace()"> 个人信息 </n-button>
-							<n-button type="primary" @click="submit()"> 提交预约 </n-button>
+							<n-button
+								type="primary"
+								:disabled="userFlag.flag.value"
+								@click="submit()"
+							>
+								提交预约
+							</n-button>
 						</div>
 					</template>
 				</n-card>
