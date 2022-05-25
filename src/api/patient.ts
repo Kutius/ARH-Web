@@ -7,7 +7,7 @@ import type {
 	ISubmitCovidDetectionResponse,
 	IUserId,
 	IApmtHistoryResponse,
-	ICovidHistoryResponse
+	ICovidHistoryResponse,
 } from './types/patient'
 
 export const apmtDetail = () => {
@@ -17,10 +17,12 @@ export const apmtDetail = () => {
 	})
 }
 
-export const userSpace = () => {
+// 用户信息修改/保存
+export const userSpace = (data: IUserId) => {
 	return service<IResponseData<ISpaceInfoResponse>>({
 		method: 'POST',
 		url: '/api/userSpace',
+		data: data,
 	})
 }
 
@@ -32,6 +34,7 @@ export const submitCovidDetection = (data: IDetectFormParams) => {
 	})
 }
 
+// 预约记录
 export const apmtHistory = (data: IUserId) => {
 	return service<IResponseData<IApmtHistoryResponse>>({
 		method: 'POST',
@@ -40,6 +43,7 @@ export const apmtHistory = (data: IUserId) => {
 	})
 }
 
+// 核酸记录
 export const covidHistory = (data: IUserId) => {
 	return service<IResponseData<ICovidHistoryResponse>>({
 		method: 'POST',

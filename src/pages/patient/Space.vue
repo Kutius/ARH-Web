@@ -1,132 +1,145 @@
 <script lang="ts" setup>
-import { IAppointData } from '~/api/types/patient'
-import { apmtHistory } from '~/api/patient'
+import { useMessage } from 'naive-ui'
+import { userSpace } from '~/api/patient'
+import space from '~/composables/spaceLogic'
 
-const loading = ref(true)
+const message = useMessage()
 
-const searchForm = ref({
-	id: null,
-	doctorName: null,
-})
+const {
+	userForm,
+	pwdForm,
+	userFormRef,
+	pwdFormRef,
+	rules,
+	confirmPwdRules,
+	idParse,
+} = space()
 
-const apmtDataFilter = ref<IAppointData[]>([])
-
-// 数据过滤
-const dataFilter = (data: IAppointData[]) => {
-	return data.filter((e) => {
-		for (const [key, value] of Object.entries(searchForm.value)) {
-			if (value && e[key as keyof typeof e].includes(value)) return true
+const userFormSubmit = () => {
+	userFormRef.value?.validate((errors) => {
+		if (!errors) {
+			userSpace({ id: userForm.value.id! }).then((res) => {
+				if (res.code === 0) {
+					userStore.user.info = userForm.value
+					message.success('修改成功')
+				} else {
+					message.error(res.message || '修改失败')
+				}
+			})
+		} else {
+			console.log(errors)
+			message.error('信息不完整')
 		}
-		return false
 	})
 }
-const onSearch = () => {
-	apmtDataFilter.value = dataFilter(appointData.value)
+const pwdSubmit = () => {
+	pwdFormRef.value?.validate((errors) => {
+		if (!errors) {
+			message.success('验证成功')
+		} else {
+			console.log(errors)
+			message.error('验证失败')
+		}
+	})
 }
-const onReset = () => {
-	apmtDataFilter.value = appointData.value
+
+// 从pinia中取出用户实例
+const userStore = useUserStore()
+
+const idInputBlur = () => {
+	userForm.value.age = idParse(userForm.value.idNumber!).age
 }
-
-// 预约挂号
-const appointColumns = [
-	{
-		title: '订单号',
-		key: 'id',
-	},
-	{
-		title: '医生名',
-		key: 'doctorName',
-	},
-	{
-		title: '预约到院时间',
-		key: 'appointTime',
-	},
-	{
-		title: '坐诊状态',
-		key: 'status',
-	},
-]
-
-const appointPagination = reactive({
-	page: 1,
-	pageSize: 5,
-	showSizePicker: true,
-	pageSizes: [5, 10],
-	onChange: (page: number) => {
-		appointPagination.page = page
-	},
-	onUpdatePageSize: (pageSize: number) => {
-		appointPagination.pageSize = pageSize
-		appointPagination.page = 1
-	},
-})
-
-const appointData = ref<IAppointData[]>([])
-
-const getApmtHistory = async () => {
-	const res = await apmtHistory({ uid: '123' })
-	if (res.code === 0) {
-		// 数据异步
-		appointData.value = res.data.history
-		apmtDataFilter.value = appointData.value
-	}
-}
-onMounted(() => {
-	getApmtHistory().then(() => (loading.value = false))
-})
 </script>
 
 <template>
-	<n-space vertical>
-		<n-card size="small" hoverable>
-			<n-form
-				ref="formRef"
-				inline
-				label-width="auto"
-				:model="searchForm"
-				label-placement="left"
-				size="small"
-				:show-feedback="false"
-			>
-				<n-form-item label="订单号" path="id">
-					<n-input v-model:value="searchForm.id" placeholder="输入订单号" />
-				</n-form-item>
-				<n-form-item label="医生姓名" path="doctorName">
-					<n-input
-						v-model:value="searchForm.doctorName"
-						placeholder="输入医生姓名"
-					/>
-				</n-form-item>
-				<n-form-item>
-					<n-button strong secondary type="primary" @click="onSearch()">
-						查询
-					</n-button>
-				</n-form-item>
-				<n-form-item>
-					<n-button strong secondary @click="onReset()"> 重置 </n-button>
-				</n-form-item>
-			</n-form>
-		</n-card>
-		<n-card>
-			<n-h3> 挂号记录 </n-h3>
-			<n-tabs type="segment" animated>
-				<n-tab-pane name="chap1" tab="第一章">
-					<n-data-table
-						:columns="appointColumns"
-						:data="apmtDataFilter"
-						:pagination="appointPagination"
-						:loading="loading"
-						bordered
-					/>
-				</n-tab-pane>
-				<n-tab-pane name="chap2" tab="第二章">
-					“威尔！着火了！快来帮忙！”我听到女朋友大喊。现在一个难题在我面前——是恢复一个重要的
-					Amazon 服务，还是救公寓的火。<br /><br />
-					我的脑海中忽然出现了 Amazon
-					著名的领导力准则”客户至上“，有很多的客户还依赖我们的服务，我不能让他们失望！所以着火也不管了，女朋友喊我也无所谓，我开始
-					debug 这个线上问题。
-				</n-tab-pane>
-			</n-tabs>
-		</n-card>
-	</n-space>
+	<!-- <n-space vertical> -->
+	<n-card>
+		<n-h3 prefix="bar">我的信息</n-h3>
+
+		<n-form
+			ref="userFormRef"
+			:model="userForm"
+			:rules="rules"
+			label-width="auto"
+			label-placement="left"
+			require-mark-placement="right-hanging"
+			:style="{
+				maxWidth: '640px',
+				margin: 'auto',
+			}"
+		>
+			<n-form-item label="姓名" path="name">
+				<n-input v-model:value="userForm.name" clearable />
+			</n-form-item>
+			<n-form-item label="用户账号" path="username">
+				<n-text depth="3">{{ userStore.user.username }}</n-text>
+			</n-form-item>
+			<n-form-item label="联系电话" path="phone">
+				<n-input v-model:value="userForm.phone" />
+			</n-form-item>
+			<n-form-item label="身份证号" path="idNumber">
+				<n-input v-model:value="userForm.idNumber" @blur="idInputBlur" />
+			</n-form-item>
+			<n-form-item label="性别" path="sex">
+				<n-radio-group v-model:value="userForm.sex" name="sex">
+					<n-space>
+						<n-radio value="male"> 男 </n-radio>
+						<n-radio value="female"> 女 </n-radio>
+					</n-space>
+				</n-radio-group>
+			</n-form-item>
+			<n-form-item label="年龄" path="age">
+				<n-text depth="3">{{ userForm.age || '暂无' }}</n-text>
+			</n-form-item>
+			<n-row :gutter="[0, 24]">
+				<n-col :span="24">
+					<div style="display: flex; justify-content: flex-end">
+						<n-button round type="primary" @click="userFormSubmit">
+							保存
+						</n-button>
+					</div>
+				</n-col>
+			</n-row>
+		</n-form>
+
+		<n-h3 prefix="bar">修改密码</n-h3>
+		<n-form
+			ref="pwdFormRef"
+			:model="pwdForm"
+			:rules="confirmPwdRules"
+			label-width="auto"
+			label-placement="left"
+			require-mark-placement="right-hanging"
+			:style="{
+				maxWidth: '640px',
+				margin: 'auto',
+			}"
+		>
+			<n-form-item label="新密码" path="password">
+				<n-input
+					v-model:value="pwdForm.password"
+					type="password"
+					show-password-on="click"
+					first
+				/>
+			</n-form-item>
+			<n-form-item label="确认密码" path="confirmPwd">
+				<n-input
+					v-model:value="pwdForm.confirmPwd"
+					type="password"
+					show-password-on="click"
+					first
+					:disabled="!pwdForm.password"
+				/>
+			</n-form-item>
+			<n-row :gutter="[0, 24]">
+				<n-col :span="24">
+					<div style="display: flex; justify-content: flex-end">
+						<n-button round type="primary" @click="pwdSubmit"> 确定 </n-button>
+					</div>
+				</n-col>
+			</n-row>
+		</n-form>
+	</n-card>
+	<!-- </n-space> -->
 </template>

@@ -17,17 +17,13 @@ export interface IApmtDetailData {
 	timestamp: number
 }
 
-enum sex {
-	male,
-	female,
-}
-
 export interface ISpaceInfoResponse {
-	id: string
-	name: string
-	phone: string
-	idNumber: string
-	sex: sex
+	id: string | null
+	name: string | null
+	idNumber: string | null
+	phone: string | null
+	sex: string | null
+	age: number | null
 }
 
 export interface IDetectFormParams {
@@ -41,7 +37,7 @@ export interface ISubmitCovidDetectionResponse {
 }
 
 export interface IUserId {
-	uid: string
+	id: string
 }
 
 export interface IAppointData {

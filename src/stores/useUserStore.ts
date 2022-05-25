@@ -1,8 +1,10 @@
-import { ILoginParams } from '../api/types/common'
+import { ILoginResponse } from './../api/types/common';
+import type { ILoginParams } from '../api/types/common'
 import { defineStore } from 'pinia'
 
-interface IUserStore extends ILoginParams {
+interface IUserInfo extends ILoginParams {
 	isLoggedIn: boolean
+	info: ILoginResponse
 }
 
 export default defineStore('userStore', {
@@ -10,7 +12,15 @@ export default defineStore('userStore', {
 		return {
 			user: {
 				isLoggedIn: false,
-			} as IUserStore,
+				info: {
+					id: null,
+					name: null,
+					idNumber: null,
+					phone: null,
+					sex: null,
+					age: null,
+				},
+			} as IUserInfo,
 		}
 	},
 	getters: {},

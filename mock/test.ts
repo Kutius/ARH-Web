@@ -100,6 +100,7 @@ export default [
 				phone: '2379422131',
 				idNumber: '09120909090',
 				sex: 'male',
+				age: null,
 			},
 		},
 	},
