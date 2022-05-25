@@ -67,10 +67,8 @@ const handleUpdateType = (_: string, option: IDetectTypeOptions) => {
 }
 
 // 用户信息判断
-const userFlag = useUserFlag()
-onMounted(() => {
-	userFlag.getUserSpace()
-})
+const userStore = useUserStore()
+const userFlag = !!(userStore.user.info.name && userStore.user.info.id)
 </script>
 
 <template>
@@ -188,7 +186,7 @@ onMounted(() => {
 			content-style="padding-left: 80px; padding-right: 80px;"
 		>
 			<n-space vertical :size="[0, 40]">
-				<n-alert v-show="!userFlag.flag.value" title="警告" type="warning">
+				<n-alert v-show="!userFlag" title="警告" type="warning">
 					您的个人身份信息尚未完善，请先完善后再预约。
 				</n-alert>
 				<n-form

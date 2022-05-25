@@ -36,6 +36,7 @@ const { run, loading } = useRequest(userLogin, {
 	onSuccess: (res) => {
 		if (res.code === 0) {
 			userStore.setUser(loginForm.value)
+			userStore.user.info = res.data
 			message.success(t('login.success'))
 			userStore.user.doctor ? router.push('/') : router.push('/patient')
 		} else {
