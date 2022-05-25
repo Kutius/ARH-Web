@@ -31,6 +31,11 @@ export default [
 			code: 0,
 			data: {
 				name: 'vben',
+				id: '123',
+				idNumber: null,
+				phone: null,
+				sex: null,
+				age: null,
 			},
 		},
 	},

@@ -11,8 +11,12 @@ export interface ILoginParams {
 }
 
 export interface ILoginResponse {
-	username: string
-	uid: string
+	id: string | null
+	name: string | null
+	idNumber: string | null
+	phone: string | null
+	sex: string | null
+	age: number | null
 }
 
 export interface INoticeResponse {
