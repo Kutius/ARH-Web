@@ -22,7 +22,7 @@ const userFlag = computed(() => !!userStore.user.info.name)
 // 加载列表数据
 onMounted(() => {
 	getApmt()
-	if (userFlag) {
+	if (!userFlag) {
 		stepStatus.value = 'error'
 	}
 })
@@ -70,7 +70,7 @@ const currentStep = computed(() => {
 const stepStatus = ref<StepsProps['status']>('process')
 
 // 步骤条文案
-const finalText = computed(() => (userFlag ? '请先完善个人信息' : '提交成功'))
+const finalText = computed(() => (!userFlag ? '请先完善个人信息' : '提交成功'))
 
 const isCompleted = computed(
 	() => department.value && timestamp.value && timeChoose.value
@@ -146,7 +146,7 @@ const submit = () => {
 					<template #action>
 						<div class="flex justify-around">
 							<n-button type="warning" @click="goSpace()"> 个人信息 </n-button>
-							<n-button type="primary" :disabled="userFlag" @click="submit()">
+							<n-button type="primary" :disabled="!userFlag" @click="submit()">
 								提交预约
 							</n-button>
 						</div>
