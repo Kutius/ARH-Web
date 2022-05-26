@@ -24,7 +24,7 @@ const onReset = () => {
 }
 
 const getApmtHistory = async () => {
-	const res = await apmtHistory({ uid: '123' })
+	const res = await apmtHistory({ id: '123' })
 	if (res.code === 0) {
 		// 数据异步
 		appointData.value = res.data.history
@@ -32,7 +32,7 @@ const getApmtHistory = async () => {
 	}
 }
 const getCovidHistory = async () => {
-	const res = await covidHistory({ uid: '123' })
+	const res = await covidHistory({ id: '123' })
 	if (res.code === 0) {
 		covidData.value = res.data.history
 	}
