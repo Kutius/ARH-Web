@@ -31,7 +31,7 @@ specifiers:
   naive-ui: ^2.29.0
   nprogress: ^0.2.0
   pinia: ^2.0.14
-  pinia-plugin-persistedstate: ^1.6.0
+  pinia-plugin-persistedstate: ^1.6.1
   plop: ^3.1.0
   prettier: 2.6.2
   prism-theme-vars: ^0.2.3
@@ -93,7 +93,7 @@ devDependencies:
   naive-ui: registry.npmmirror.com/naive-ui/2.29.0_vue@3.2.36
   nprogress: 0.2.0
   pinia: registry.npmmirror.com/pinia/2.0.14_qhv4oyzxhhzeba5rd2zztmcg2y
-  pinia-plugin-persistedstate: registry.npmmirror.com/pinia-plugin-persistedstate/1.6.0_pinia@2.0.14
+  pinia-plugin-persistedstate: registry.npmmirror.com/pinia-plugin-persistedstate/1.6.1_pinia@2.0.14
   plop: registry.npmmirror.com/plop/3.1.0
   prettier: registry.npmmirror.com/prettier/2.6.2
   prism-theme-vars: registry.npmmirror.com/prism-theme-vars/0.2.3
@@ -5322,11 +5322,11 @@ packages:
     dev: true
     optional: true
 
-  registry.npmmirror.com/pinia-plugin-persistedstate/1.6.0_pinia@2.0.14:
-    resolution: {integrity: sha512-J7BRqjSZuZ436RflNqudSHx85nk/86IUmAVeFNq3KQbSL7w63ABEf8k2Z8Zo1RBHfVTyam0hxtK19WxGE70M7A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-1.6.0.tgz}
-    id: registry.npmmirror.com/pinia-plugin-persistedstate/1.6.0
+  registry.npmmirror.com/pinia-plugin-persistedstate/1.6.1_pinia@2.0.14:
+    resolution: {integrity: sha512-4re0ZO5KgqDnSNWX2RhJVIsIYvH+uaEGTN+UOx34mb7fVoE8A3CfB9QhbMT3Zn7ZSBXTfT2cgI/w7cLq2zNQMw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-1.6.1.tgz}
+    id: registry.npmmirror.com/pinia-plugin-persistedstate/1.6.1
     name: pinia-plugin-persistedstate
-    version: 1.6.0
+    version: 1.6.1
     peerDependencies:
       pinia: ^2.0.0
     dependencies:
