@@ -38,7 +38,7 @@ const { run, loading } = useRequest(userLogin, {
 			userStore.setUser(loginForm.value)
 			userStore.user.info = res.data
 			message.success(t('login.success'))
-			userStore.user.doctor ? router.push('/') : router.push('/patient')
+			userStore.user.doctor ? router.push('/doctor') : router.push('/patient')
 		} else {
 			message.error(res.message || t('login.fail'))
 		}

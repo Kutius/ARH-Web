@@ -7,6 +7,7 @@ import {
 	PersonInfo20Regular as InfoIcon,
 	Stethoscope24Regular as ReserveIcon,
 	History24Regular as HistoryIcon,
+	AppsListDetail24Regular as ListIcon,
 } from '@vicons/fluent'
 
 const renderIcon = (icon: Component) => {
@@ -15,72 +16,18 @@ const renderIcon = (icon: Component) => {
 export const useMenuStore = defineStore('menus', {
 	state: () => {
 		return {
-			value: [
+			doctor: [
 				{
 					icon: renderIcon(DocumentIcon),
-					label: '首页',
-					hrefName: 'Index',
-					key: 'Index',
+					label: 'menu.index',
+					hrefName: 'doctor-Index',
+					key: 'doctor-Index',
 				},
 				{
-					label: '回家',
-					hrefName: 'test',
-					key: 'test',
-				},
-				{
-					label: '病人首页',
-					hrefName: 'patient-Index',
-					key: 'patient-Index',
-				},
-				{
-					label: '寻羊冒险记',
-					key: 'a-wild-sheep-chase',
-					disabled: true,
-				},
-				{
-					label: '舞，舞，舞',
-					key: 'dance-dance-dance',
-					children: [
-						{
-							type: 'group',
-							label: '人物',
-							key: 'people',
-							children: [
-								{
-									label: '叙事者',
-									key: 'narrator',
-								},
-								{
-									label: '羊男',
-									key: 'sheep-man',
-								},
-							],
-						},
-						{
-							label: '饮品',
-							key: 'beverage',
-							children: [
-								{
-									label: '威士忌',
-									key: 'whisky',
-								},
-							],
-						},
-						{
-							label: '食物',
-							key: 'food',
-							children: [
-								{
-									label: '三明治',
-									key: 'sandwich',
-								},
-							],
-						},
-						{
-							label: '过去增多，未来减少',
-							key: 'the-past-increases-the-future-recedes',
-						},
-					],
+					icon: renderIcon(ListIcon),
+					label: '坐诊排班',
+					hrefName: 'doctor-Schedule',
+					key: 'doctor-Schedule',
 				},
 			],
 			patient: [

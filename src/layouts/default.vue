@@ -66,7 +66,7 @@ const menus = useMenuStore()
 const userStore = useUserStore()
 
 const currentRoleMenu = computed(() => {
-	return userStore.user.doctor ? menus.value : menus.patient
+	return userStore.user.doctor ? menus.doctor : menus.patient
 })
 
 // 自定义渲染label
