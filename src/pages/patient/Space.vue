@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { userSpace } from '~/api/patient'
+import { changePassword, userSpace } from '~/api/patient'
 import space from '~/composables/spaceLogic'
 
 const message = useMessage()
@@ -27,7 +27,6 @@ const userFormSubmit = () => {
 				}
 			})
 		} else {
-			console.log(errors)
 			message.error('信息不完整')
 		}
 	})
@@ -35,10 +34,16 @@ const userFormSubmit = () => {
 const pwdSubmit = () => {
 	pwdFormRef.value?.validate((errors) => {
 		if (!errors) {
-			message.success('验证成功')
-		} else {
-			console.log(errors)
-			message.error('验证失败')
+			changePassword({
+				id: userStore.user.info.id!,
+				newPassword: pwdForm.value.password,
+			}).then((res) => {
+				if (res.code === 0) {
+					message.success('修改成功')
+				} else {
+					message.error(res.message || '修改失败')
+				}
+			})
 		}
 	})
 }

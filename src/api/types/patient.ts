@@ -59,3 +59,14 @@ export interface IApmtHistoryResponse {
 export interface ICovidHistoryResponse {
 	history: ICovidData[]
 }
+
+// 密码form
+export interface IChangePasswordForm {
+	id: string
+	newPassword: string
+}
+
+// 操作结果
+export interface IResultResponse {
+	result: string
+}

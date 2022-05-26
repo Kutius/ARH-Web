@@ -8,6 +8,8 @@ import type {
 	IUserId,
 	IApmtHistoryResponse,
 	ICovidHistoryResponse,
+	IChangePasswordForm,
+	IResultResponse,
 } from './types/patient'
 
 export const apmtDetail = () => {
@@ -48,6 +50,15 @@ export const covidHistory = (data: IUserId) => {
 	return service<IResponseData<ICovidHistoryResponse>>({
 		method: 'POST',
 		url: '/api/covidHistory',
+		data: data,
+	})
+}
+
+// 修改密码
+export const changePassword = (data: IChangePasswordForm) => {
+	return service<IResponseData<IResultResponse>>({
+		method: 'POST',
+		url: '/api/changePassword',
 		data: data,
 	})
 }
