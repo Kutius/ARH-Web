@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { apmtHistory, covidHistory } from '~/api/patient'
 
+const userStore = useUserStore()
+const userId = userStore.user.info.id
+
 const {
 	searchForm,
 	apmtDataFilter,
@@ -24,7 +27,7 @@ const onReset = () => {
 }
 
 const getApmtHistory = async () => {
-	const res = await apmtHistory({ id: '123' })
+	const res = await apmtHistory({ id: userId! })
 	if (res.code === 0) {
 		// 数据异步
 		appointData.value = res.data.history
@@ -32,7 +35,7 @@ const getApmtHistory = async () => {
 	}
 }
 const getCovidHistory = async () => {
-	const res = await covidHistory({ id: '123' })
+	const res = await covidHistory({ id: userId! })
 	if (res.code === 0) {
 		covidData.value = res.data.history
 	}
