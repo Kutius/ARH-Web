@@ -21,7 +21,6 @@ specifiers:
   eslint-plugin-vue: ^8.7.1
   fast-glob: ^3.2.11
   fs-extra: ^10.1.0
-  husky: ^7.0.4
   ityped: ^1.0.3
   less: ^4.1.2
   lint-staged: ^12.4.2
@@ -83,7 +82,6 @@ devDependencies:
   eslint-plugin-vue: registry.npmmirror.com/eslint-plugin-vue/8.7.1_eslint@8.16.0
   fast-glob: 3.2.11
   fs-extra: registry.npmmirror.com/fs-extra/10.1.0
-  husky: 7.0.4
   ityped: 1.0.3
   less: registry.npmmirror.com/less/4.1.2
   lint-staged: registry.npmmirror.com/lint-staged/12.4.2
@@ -439,12 +437,6 @@ packages:
       domhandler: 4.3.1
       domutils: 2.8.0
       entities: registry.npmmirror.com/entities/2.2.0
-    dev: true
-
-  /husky/7.0.4:
-    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
-    engines: {node: '>=12'}
-    hasBin: true
     dev: true
 
   /is-module/1.0.0:

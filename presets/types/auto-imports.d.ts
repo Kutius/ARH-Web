@@ -226,7 +226,6 @@ declare global {
   const useToggle: typeof import('@vueuse/core')['useToggle']
   const useTransition: typeof import('@vueuse/core')['useTransition']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
-  const useUserFlag: typeof import('/Projects/Vue/register-hospital/src/composables/useUserFlag')['default']
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia']
   const useUserStore: typeof import('/Projects/Vue/register-hospital/src/stores/useUserStore')['default']
   const useVibrate: typeof import('@vueuse/core')['useVibrate']

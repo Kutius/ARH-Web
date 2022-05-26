@@ -225,7 +225,6 @@
     "useToggle": true,
     "useTransition": true,
     "useUrlSearchParams": true,
-    "useUserFlag": true,
     "useUserMedia": true,
     "useUserStore": true,
     "useVibrate": true,
