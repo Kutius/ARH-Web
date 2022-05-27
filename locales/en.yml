@@ -27,6 +27,7 @@ menu:
   history: Appoint History
   index: Index
   space: Space
+  schedule: Schedule
 header:
   language: switch language
   logout: log out
