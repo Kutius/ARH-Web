@@ -66,6 +66,7 @@ const menus = useMenuStore()
 const userStore = useUserStore()
 
 const currentRoleMenu = computed(() => {
+	if (userStore.user.username === 'admin') return menus.admin
 	return userStore.user.doctor ? menus.doctor : menus.patient
 })
 

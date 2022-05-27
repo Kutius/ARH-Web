@@ -4,15 +4,14 @@ import { DataTableColumns, FormInst, NButton, useMessage } from 'naive-ui'
 const message = useMessage()
 
 const searchForm = ref({
-	id: null,
-	doctorName: null,
+	scheduleDate: '',
 })
 
 const apmtDataFilter = ref<Schedule[]>([
 	{
 		id: '1',
 		doctorName: '张三',
-		scheduleDate: '2020-04-01',
+		scheduleDate: '2022/06/01',
 		scheduleStartTime: '10:00',
 		scheduleEndTime: '11:00',
 		totalCount: 10,
@@ -21,12 +20,12 @@ const apmtDataFilter = ref<Schedule[]>([
 const loadingAmpt = ref(false)
 
 interface Schedule {
-	id: string
-	doctorName: string
-	scheduleDate: string
-	scheduleStartTime: string
-	scheduleEndTime: string
-	totalCount: number
+	id: string | null
+	doctorName: string | null
+	scheduleDate: string | null
+	scheduleStartTime: string | null
+	scheduleEndTime: string | null
+	totalCount: number | null
 }
 
 const createColumns = ({
@@ -79,7 +78,10 @@ const createColumns = ({
 
 const scheduleColumns = createColumns({
 	play(row: Schedule) {
-		message.info(`Play ${row.id}`)
+		// message.info(`Play ${row.id}`)
+		editMode.value = true
+		modalForm.value = row
+		showModal.value = true
 	},
 })
 
@@ -99,14 +101,17 @@ const appointPagination = reactive({
 
 // 模态框
 interface Modal {
-	scheduleDate: number | null
+	id?: string | null
+	doctorName?: string | null
+	scheduleDate: string | null
 	scheduleStartTime: string | null
 	scheduleEndTime: string | null
 	totalCount: number | null
 }
+const editMode = ref(false) // 当前是否为编辑的状态
 const showModal = ref(false)
 const modalFormRef = ref<FormInst | null>(null)
-const modelForm = ref<Modal>({
+const modalForm = ref<Modal>({
 	scheduleDate: null,
 	scheduleStartTime: null,
 	scheduleEndTime: null,
@@ -120,7 +125,7 @@ const modalRules = {
 		{
 			validator: (rule: any, value: string) => {
 				const toNumber = (v: string) => Number(v.replace(':', ''))
-				return toNumber(value) > toNumber(modelForm.value.scheduleStartTime!)
+				return toNumber(value) > toNumber(modalForm.value.scheduleStartTime!)
 			},
 			message: '结束时间不能小于开始时间',
 			trigger: 'input',
@@ -138,15 +143,53 @@ const modalSubmit = () => {
 			// 	.catch((err) => {
 			// 		message.error(err.message)
 			// 	})
+			if (editMode.value) {
+				const _INDEX = apmtDataFilter.value.findIndex(
+					(item) => item.id === modalForm.value.id
+				)
+				apmtDataFilter.value[_INDEX].scheduleDate = modalForm.value.scheduleDate
+				apmtDataFilter.value[_INDEX].scheduleStartTime =
+					modalForm.value.scheduleStartTime
+				apmtDataFilter.value[_INDEX].scheduleEndTime =
+					modalForm.value.scheduleEndTime
+				apmtDataFilter.value[_INDEX].totalCount = modalForm.value.totalCount
+			} else {
+				apmtDataFilter.value.push({
+					...modalForm.value,
+					id: String(apmtDataFilter.value.length + 1),
+					doctorName: '张三',
+				})
+			}
 			message.success('提交成功')
-			console.log(modelForm.value)
+			console.log(modalForm.value)
 			showModal.value = false
 		}
 	})
 }
+const onModalClose = () => {
+	modalForm.value = {
+		scheduleDate: null,
+		scheduleStartTime: null,
+		scheduleEndTime: null,
+		totalCount: 1,
+	}
+	editMode.value = false
+}
 // 时间列表
 const hours = Array.from({ length: 11 }, (_, i) => 8 + i)
 const disablePreviousDate = (ts: number) => ts < Date.now()
+
+/* 搜索 */
+const searchFlag = ref(false)
+const searchFilter = computed(() => {
+	if (searchFlag.value) {
+		return apmtDataFilter.value.filter((item) => {
+			return item.scheduleDate!.includes(searchForm.value.scheduleDate)
+		})
+	} else {
+		return apmtDataFilter.value
+	}
+})
 </script>
 
 <template>
@@ -161,14 +204,21 @@ const disablePreviousDate = (ts: number) => ts < Date.now()
 				size="small"
 				:show-feedback="false"
 			>
-				<n-form-item label="排班时间" path="id">
-					<n-input v-model:value="searchForm.id" placeholder="输入排班时间" />
+				<n-form-item label="排班日期" path="scheduleDate">
+					<n-input
+						v-model:value="searchForm.scheduleDate"
+						placeholder="输入排班日期"
+					/>
 				</n-form-item>
 				<n-form-item>
-					<n-button strong secondary type="primary" @click=""> 查询 </n-button>
+					<n-button strong secondary type="primary" @click="searchFlag = true">
+						查询
+					</n-button>
 				</n-form-item>
 				<n-form-item>
-					<n-button strong secondary @click=""> 重置 </n-button>
+					<n-button strong secondary @click="searchFlag = false">
+						重置
+					</n-button>
 				</n-form-item>
 			</n-form>
 		</n-card>
@@ -190,7 +240,7 @@ const disablePreviousDate = (ts: number) => ts < Date.now()
 
 			<n-data-table
 				:columns="scheduleColumns"
-				:data="apmtDataFilter"
+				:data="searchFilter"
 				:pagination="appointPagination"
 				:loading="loadingAmpt"
 				bordered
@@ -201,22 +251,24 @@ const disablePreviousDate = (ts: number) => ts < Date.now()
 	<n-modal
 		v-model:show="showModal"
 		preset="card"
-		title="卡片预设"
+		title="坐诊安排"
 		size="small"
+		@after-leave="onModalClose"
 		:segmented="true"
 		:style="{ maxWidth: '500px' }"
 		:content-style="{ paddingLeft: '40px', paddingRight: '40px' }"
 	>
 		<n-form
 			ref="modalFormRef"
-			:model="modelForm"
+			:model="modalForm"
 			label-width="auto"
 			label-placement="left"
 			:rules="modalRules"
 		>
 			<n-form-item label="排班日期" path="scheduleDate">
 				<n-date-picker
-					v-model:value="modelForm.scheduleDate"
+					v-model:formatted-value="modalForm.scheduleDate"
+					format="yyyy/MM/dd"
 					type="date"
 					:is-date-disabled="disablePreviousDate"
 					:actions="null"
@@ -225,24 +277,24 @@ const disablePreviousDate = (ts: number) => ts < Date.now()
 			</n-form-item>
 			<n-form-item label="坐诊开始时间" path="scheduleStartTime">
 				<n-time-picker
-					v-model:formatted-value="modelForm.scheduleStartTime"
-					value-format="H:m"
-					format="h:mm"
+					v-model:formatted-value="modalForm.scheduleStartTime"
+					value-format="H:mm"
+					format="H:mm"
 					:hours="hours"
 					:minutes="[0, 30]"
 				/>
 			</n-form-item>
 			<n-form-item label="坐诊结束时间" path="scheduleEndTime">
 				<n-time-picker
-					v-model:formatted-value="modelForm.scheduleEndTime"
-					value-format="H:m"
+					v-model:formatted-value="modalForm.scheduleEndTime"
+					value-format="H:mm"
 					format="H:mm"
 					:hours="hours"
 					:minutes="[0, 30]"
 				/>
 			</n-form-item>
 			<n-form-item label="总挂号数" path="totalCount">
-				<n-input-number v-model:value="modelForm.totalCount" :min="1" />
+				<n-input-number v-model:value="modalForm.totalCount" :min="1" />
 			</n-form-item>
 		</n-form>
 

@@ -42,7 +42,7 @@ const getApmtHistory = async () => {
 // }
 const covidStore = useCovidStore()
 const getCovidHistory = async () => {
-	covidData.value = covidStore.formatData!
+	covidData.value = covidStore.formatData
 	console.log('pinia加载数据')
 }
 

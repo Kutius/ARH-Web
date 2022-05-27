@@ -8,7 +8,7 @@ export default defineStore('covidStore', {
 	getters: {
 		formatData: (state) => {
 			const res = state.detectionForm.map((item) => {
-				if (item === null) return null
+				if (item === null) return item
 				return {
 					arriveDate: item.arriveDate,
 					detectType: item.detectType === 'solo' ? '单检' : '混检',
