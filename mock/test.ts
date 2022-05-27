@@ -56,7 +56,7 @@ export default [
 		response: {
 			code: 0,
 			data: {
-				content: 'hello world',
+				content: '这是公告板',
 			},
 		},
 	},
