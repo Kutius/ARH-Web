@@ -33,6 +33,8 @@ menu:
   space: 信息管理
   history: 预约记录
   schedule: 坐诊排班
+  notice: 公告管理
+  management: 用户管理
 patient:
   index:
     good-morning: 早上好

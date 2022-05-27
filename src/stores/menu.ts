@@ -25,9 +25,23 @@ export const useMenuStore = defineStore('menus', {
 				},
 				{
 					icon: renderIcon(ListIcon),
-					label: '坐诊排班',
+					label: 'menu.schedule',
 					hrefName: 'doctor-Schedule',
 					key: 'doctor-Schedule',
+				},
+			],
+			admin: [
+				{
+					icon: renderIcon(DocumentIcon),
+					label: 'menu.notice',
+					hrefName: 'admin-Index',
+					key: 'admin-Index',
+				},
+				{
+					icon: renderIcon(ListIcon),
+					label: 'menu.management',
+					hrefName: 'admin-Management',
+					key: 'admin-Management',
 				},
 			],
 			patient: [
