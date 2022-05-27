@@ -123,6 +123,7 @@ declare global {
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
   const useCounter: typeof import('@vueuse/core')['useCounter']
   const useCovidDt: typeof import('/Projects/Vue/register-hospital/src/composables/useCovidDt')['default']
+  const useCovidStore: typeof import('/Projects/Vue/register-hospital/src/stores/useCovidStore')['default']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVar: typeof import('@vueuse/core')['useCssVar']
   const useCssVars: typeof import('vue')['useCssVars']

@@ -34,11 +34,16 @@ const getApmtHistory = async () => {
 		apmtDataFilter.value = appointData.value
 	}
 }
+// const getCovidHistory = async () => {
+// 	const res = await covidHistory({ id: userId! })
+// 	if (res.code === 0) {
+// 		covidData.value = res.data.history
+// 	}
+// }
+const covidStore = useCovidStore()
 const getCovidHistory = async () => {
-	const res = await covidHistory({ id: userId! })
-	if (res.code === 0) {
-		covidData.value = res.data.history
-	}
+	covidData.value = covidStore.formatData!
+	console.log('pinia加载数据')
 }
 
 onMounted(() => {

@@ -25,16 +25,28 @@ const validateSurvey = () => {
 		message.error('信息异常，请联系医院')
 	}
 }
+
+// 提交btn状态
+const btnStatus = ref(false)
+
+//pinia 提交
+const covidStore = useCovidStore()
 const submitDetect = () => {
 	detectFormRef.value?.validate((errors) => {
 		if (!errors) {
-			submitCovidDetection(detectForm.value)
-				.then(() => {
-					message.success('提交成功')
-				})
-				.catch((err) => {
-					message.error(err.message)
-				})
+			btnStatus.value = true
+			// submitCovidDetection(detectForm.value)
+			// 	.then(() => {
+			// 		message.success('提交成功')
+			// 	})
+			// 	.catch((err) => {
+			// 		message.error(err.message)
+			// 	})
+			covidStore.detectionForm.push(detectForm.value)
+			setTimeout(() => {
+				message.success('提交成功')
+				btnStatus.value = false
+			}, 1000)
 		}
 	})
 }
@@ -68,7 +80,7 @@ const handleUpdateType = (_: string, option: IDetectTypeOptions) => {
 
 // 用户信息判断
 const userStore = useUserStore()
-const userFlag = !!(userStore.user.info.name && userStore.user.info.id)
+const userFlag = !!(userStore.user.info.name && userStore.user.info.idNumber)
 </script>
 
 <template>
@@ -199,7 +211,8 @@ const userFlag = !!(userStore.user.info.name && userStore.user.info.id)
 				>
 					<n-form-item label="预约到院日期" path="arriveDate">
 						<n-date-picker
-							v-model:value="detectForm.arriveDate"
+							v-model:formatted-value="detectForm.arriveDate"
+							value-format="yyyy/MM/dd"
 							placeholder="请选择预约到院日期"
 							type="date"
 							:is-date-disabled="disablePreviousDate"
@@ -226,7 +239,9 @@ const userFlag = !!(userStore.user.info.name && userStore.user.info.id)
 			</n-space>
 			<template #action>
 				<div class="flex justify-around">
-					<n-button type="primary" @click="submitDetect()"> 提交 </n-button>
+					<n-button type="primary" @click="submitDetect()" :loading="btnStatus">
+						提交
+					</n-button>
 				</div>
 			</template>
 		</n-card>

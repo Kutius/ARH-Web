@@ -20,6 +20,7 @@ const userFormSubmit = () => {
 		if (!errors) {
 			userSpace({ id: userForm.value.id! }).then((res) => {
 				if (res.code === 0) {
+					console.log(userForm.value)
 					userStore.user.info = userForm.value
 					message.success('修改成功')
 				} else {

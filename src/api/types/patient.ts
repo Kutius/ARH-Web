@@ -27,7 +27,7 @@ export interface ISpaceInfoResponse {
 }
 
 export interface IDetectFormParams {
-	arriveDate: null | number
+	arriveDate: null | string
 	detectType: null | string
 	price: null | string
 }

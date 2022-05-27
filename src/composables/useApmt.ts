@@ -7,19 +7,19 @@ const options: CascaderOption[] = [
 		label: '内科',
 		children: [
 			{
-				value: 'hu-xi-nei',
+				value: '呼吸内科',
 				label: '呼吸内科',
 			},
 			{
-				value: 'xiao-hua-nei',
+				value: '消化内科',
 				label: '消化内科',
 			},
 			{
-				value: 'shen-jing-nei',
+				value: '神经内科',
 				label: '神经内科',
 			},
 			{
-				value: 'nei-fen-mi',
+				value: '内分泌科',
 				label: '内分泌科',
 			},
 		],
@@ -29,8 +29,20 @@ const options: CascaderOption[] = [
 		label: '外科',
 		children: [
 			{
-				value: 'nanjing',
-				label: 'Nanjing',
+				value: '普通外科',
+				label: '普通外科',
+			},
+			{
+				value: '胸外科',
+				label: '胸外科',
+			},
+			{
+				value: '泌尿外科',
+				label: '泌尿外科',
+			},
+			{
+				value: '骨科',
+				label: '骨科',
 			},
 		],
 	},
@@ -39,8 +51,12 @@ const options: CascaderOption[] = [
 		label: '妇产科',
 		children: [
 			{
-				value: 'nanjing',
-				label: 'Nanjing',
+				value: '产科',
+				label: '产科',
+			},
+			{
+				value: '妇科',
+				label: '妇科',
 			},
 		],
 	},
@@ -49,8 +65,12 @@ const options: CascaderOption[] = [
 		label: '儿科',
 		children: [
 			{
-				value: 'nanjing',
-				label: 'Nanjing',
+				value: '儿内科',
+				label: '儿内科',
+			},
+			{
+				value: '儿外科',
+				label: '儿外科',
 			},
 		],
 	},
