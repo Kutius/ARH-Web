@@ -22,8 +22,7 @@
     "auto:remove": "plop --plopfile scripts/remove.js",
     "analysis:build": "windicss-analysis --html dist",
     "lint": "eslint --ext .ts,.js,.jsx,.vue .",
-    "lint:fix": "eslint --fix --ext .ts,.js,.jsx,.vue .",
-    "prepare": "husky install"
+    "lint:fix": "eslint --fix --ext .ts,.js,.jsx,.vue ."
   },
   "dependencies": {
     "vue": "^3.2.36"

@@ -45,6 +45,10 @@ const apmtChoices = computed(() =>
 		}))
 )
 
+const selectedApmt = computed(() =>
+	apmtList.value.find((item) => item.date === timestamp.value)
+)
+
 const handlerDepartment = (v: string) => {
 	console.log(v)
 	timestamp.value = null
@@ -131,16 +135,19 @@ const submit = () => {
 				</n-card>
 			</n-gi>
 			<n-gi :span="isCompleted ? 3 : 0">
-				<n-card class="h-52">
-					<n-descriptions label-placement="top" title="预约信息">
+				<n-card size="small">
+					<n-descriptions label-placement="top" title="预约信息" bordered>
 						<n-descriptions-item label="挂号科室">
 							{{ department }}
 						</n-descriptions-item>
-						<n-descriptions-item label="日期">
+						<!-- <n-descriptions-item label="日期">
 							{{ timestampToTime(timestamp!) }}
-						</n-descriptions-item>
+						</n-descriptions-item> -->
 						<n-descriptions-item label="时间">
 							{{findApmt(timeChoose!)?.label}}
+						</n-descriptions-item>
+						<n-descriptions-item label="医生">
+							{{ selectedApmt?.doctorName }}
 						</n-descriptions-item>
 					</n-descriptions>
 					<template #action>
