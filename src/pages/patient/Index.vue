@@ -40,7 +40,7 @@ const { data } = useRequest(getNotice)
 			{{ data?.data.content || t('patient.index.notice-content') }}
 			<template #action>
 				<n-space>
-					<n-button size="small"> 1 块钱 </n-button>
+					<n-button size="small"> 知悉 </n-button>
 				</n-space>
 			</template>
 			<template #footer>

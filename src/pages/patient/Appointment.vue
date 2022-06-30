@@ -17,12 +17,12 @@ const message = useMessage()
 
 // 获取用户信息
 const userStore = useUserStore()
-const userFlag = computed(() => !!userStore.user.info.name)
+const userFlag = computed(() => !!userStore.user.info.idNumber)
 
 // 加载列表数据
 onMounted(() => {
 	getApmt()
-	if (!userFlag) {
+	if (!userFlag.value) {
 		stepStatus.value = 'error'
 	}
 })
@@ -74,7 +74,7 @@ const currentStep = computed(() => {
 const stepStatus = ref<StepsProps['status']>('process')
 
 // 步骤条文案
-const finalText = computed(() => (!userFlag ? '请先完善个人信息' : '提交成功'))
+const finalText = computed(() => (!userFlag.value ? '请先完善个人信息' : '提交成功'))
 
 const isCompleted = computed(
 	() => department.value && timestamp.value && timeChoose.value
